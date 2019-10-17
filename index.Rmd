@@ -12,10 +12,10 @@ output:
 You can learn about me [here](about_page.html)
 
 ![](https://media.giphy.com/media/drXGoW1iudhKw/giphy.gif)
+
 # Add some links
 
 I often use [google](https://www.google.com/) to do data science.
-
 
 # Add image
 
