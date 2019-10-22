@@ -2,7 +2,11 @@
 title: "Plotly and flexdashboard"
 author: "Junxian Chen (jc5314)"
 date: "10/22/2019"
-output: html_document
+code_folding: hide
+output: 
+  html_document:
+    toc: true
+    toc_float: true
   
 ---
 
