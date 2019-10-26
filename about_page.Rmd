@@ -4,9 +4,18 @@ output:
   html_document:
     toc: true
     toc_float: true
-    #theme: cerulean
 ---
 
-My name is Jeff and I make a website.
+## Education
+
+## Working Experience 
+
+## Academic Research Projects
+
+## Selected Course Projects
+
+## Techniques and Skills
+
+## Leadership and Volunteers
 
 

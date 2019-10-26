@@ -20,7 +20,7 @@ Column {data-width=600}
 ### Chart A
 
 ```{r}
-data(nyc_airbnb)
+data(rest_inspec)
 
 nyc_airbnb = 
   nyc_airbnb %>% 
