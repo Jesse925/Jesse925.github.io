@@ -6,6 +6,7 @@ output:
     toc_float: true
 ---
 
+
 <center><img src="image/welcome.jpg" style="width:100%"></center>
 
 

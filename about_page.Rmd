@@ -1,21 +1,149 @@
 ---
-title: "About Me"
+title: "Junxian Chen"
 output: 
   html_document:
     toc: true
     toc_float: true
 ---
 
+<br/>
+
 ## Education
+
+*May 2021*, **Master of Science in Biostatistics**, theory and method tack
+
+Columbia University, Mailman School of Public Health, NY, US
+
+Selected Courses: Data Science, Probability, Biostatistical Methods, Epidemiology, Intro to Public Health
+
+<br/>
+
+*May 2019*, **Bachelor of Science in Engineering Physics**
+
+The Hong Kong Polytechnic University, Faculty of Applied Science and Textiles, HK
+
+Selected Courses: Statistics, Simulation, Time Series Analysis, High Dimensional Data Analysis, Decision Analysis
+
+<br/>
+
+*Aug. - Dec. 2017*, Student Exchange Program
+
+North Carolina State University, College of Sciences North Carolina, NC, US 
+
+Selected Courses: Scientific Computing with Python, Statistics Programming in SAS, Statistical Inference & Regression
+
+<br/>
 
 ## Working Experience 
 
+*May - Aug. 2019*, **AI Product Manager Intern** (Medical & Healthcare Group) 
+
+Ping-An Technology (Shen Zhen) Co., Ltd. Guang Dong, CN 
+
+Accomplishments:
+
+* Investigated status quo of widespread diseases and problems encountered in treatments through research and market data
+
+* Proposed innovative products with AI techniques in assisting prevention, diagnosis, and treatment of diseases
+
+* Analyzed existing data and used SWOT and PEST methods to explore market demand and product availability
+
+* Created project reports and present to company leaders to illustrate the new products
+
+* Assisted in other projects included ‘Knowledge Graph construction for precision medicine’, ‘National Health Accounts with AI techniques’, ‘Intelligent prediction for adjusted life expectancy’ through data collection and market research
+
+<br/>
+
 ## Academic Research Projects
+
+*May - Aug. 2018*, **Research Intern** 
+
+Johns Hopkins University, Department of Biostatistics, MD, US 
+
+Project: *Inverse Odds Ratio-Weighted (IORW) Estimation for Causal Mediation Analysis*
+
+Accomplishments:
+
+* Conducted theoretical analyses on the IORW estimation method in mediation analysis on continuous and binomial cases 
+
+* Applied the approach into practical models in genomics and conducted comprehensive simulations with real data
+
+* Sought and developed more effective and flexible modifications to this method when dealing with high dimensional data 
+
+<br/>
+
+*Jan. - May 2018*, **Research Assistant**
+
+The Hong Kong Polytechnic University, Department of Applied Mathematics, HK 
+
+Project: *Mathematical Modeling and Prediction for Pneumonia and Influenza (P&I) Mortality*
+
+Accomplishments:
+
+* Collected, processed and analyzed P&I mortality data and environmental indicators in Hong Kong from 1998 to 2016
+
+* Applied latest machine learning method called ‘boost regression tree model’ in modeling of P&I mortality
+
+* Obtained 95% prediction power in the project which was much better than other current models in P&I mortality studies
+
+<br/>
 
 ## Selected Course Projects
 
+*Sep. 2018 - May 2019*
+
+The Hong Kong Polytechnic University, Department of Applied Physics, HK
+
+Capstone Project: **Artificial Neural Network for Molecular Dynamic Simulation**
+
+Accomplishments:
+
+* Created ‘fingerprints’ as data representations for each molecular in data training to improve efficiency
+
+* Built a feed-forward neural network using Python to obtain molecular force given their positions
+
+* Optimized the network and made the error rate less than 5% to be comparable with the most precise quantum method
+
+<br/>
+
 ## Techniques and Skills
+
+**Programming Language**: R, Python, SAS, SQL, C++, C, MATLAB 
+
+**Software**: Tableau, Microsoft Office
+
+**Language**: Fluent in English
+
+<br/>
 
 ## Leadership and Volunteers
 
+*Sep. 2019 - May 2020*, **Wellness Ambassador**
 
+Office of University Life, Columbia University
+
+<br/>
+
+*May 2016 - May 2017*, **Vice President**
+
+The Chinese Mainland Students’ Association, Hong Kong Polytechnic University 
+
+<br/>
+
+*Jun. - Jul. 2016*, **Volunteer**
+
+Voluntary Service in Rural Farms, Sichuan Province, China
+
+<br/>
+
+## Awards and Funds
+
+*Aug. 2018*
+
+Reaching Out Award, HKSAR Government Scholarship
+
+<br/>
+
+*May 2018*
+
+Undergraduate Research Fund, Hong Kong Polytechnic University
