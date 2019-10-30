@@ -34,11 +34,11 @@ Sure! You can learn more about me and see my past academic and professional expe
 
 Come and see some great data visualization examples!
 
-Please click the 'Data Visualization' buttom on the <font size="3" color="red">site navigation bar</font>. You will see a drop-down menu contains 'Dashboard' and 'Plotly Example Code'. 
+Please click the <font size="3" color="black">'Data Visualization'</font> buttom on the <font size="3" color="red">site navigation bar</font>. You will see a drop-down menu contains 'Dashboard' and 'Plotly Example Code'. 
 
-The 'Dashboard' will give you an awesome dashboard showing data information about .... 
+The 'Dashboard' will give you an awesome dashboard showing data information of over 3 million online grocery orders from more than 200,000 Instacart users in 2017. 
 
-The 'Plotly Example Code' will provide you some example codes about how to make plots  with interactivity in R using the 'plotly' package.
+The 'Plotly Example Code' will provide you some example codes about how to make plots with interactivity in R using the 'plotly' package.
 
 
 ## Contact me
