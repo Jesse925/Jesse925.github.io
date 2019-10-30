@@ -9,7 +9,6 @@ output:
 ```{r setup, include=FALSE}
 library(flexdashboard)
 library(tidyverse)
-library(viridis)
 library(p8105.datasets)
 library(plotly)
 ```
@@ -51,13 +50,13 @@ instacart %>%
       order_dow == '4' ~ 'Thursday',
       order_dow == '5' ~ 'Friday',
       order_dow == '6' ~ 'Saturday',
-    )
+    ),
+    order_dow = factor(order_dow, levels = c('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'))
   ) %>% 
   filter(aisle == 'fresh vegetables') %>% 
-  count(order_dow, name = 'day_of_week') %>%
-  mutate(order_dow = fct_reorder(order_dow, -day_of_week)) %>% 
+  count(order_dow, name = 'day_of_week') %>% 
   plot_ly(
-    x = ~order_dow,  y = ~day_of_week, color = ~order_dow, colors = "Set2", type = 'bar') %>%
+    x = ~order_dow,  y = ~day_of_week, type = 'scatter', mode = 'lines+markers') %>%
   layout(
     xaxis = list(title = "Day of week"),
     yaxis = list(title = "Number of purchase"),
