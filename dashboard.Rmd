@@ -17,41 +17,76 @@ library(plotly)
 Column {data-width=600}
 -----------------------------------------------------------------------
 
-### Chart A
+### Chart A: Number of items ordered in each aisle with more than 10000 items ordered
 
 ```{r}
-data(rest_inspec)
+data("instacart")
 
-nyc_rest = 
-  rest_inspec %>% 
-  filter(
-    boro == 'MANHATTAN',
-    cuisine_description == 'Asian')
-
-
-nyc_rest %>%
+instacart %>% 
+  count(aisle, name = 'number_of_items_ordered') %>%
+  mutate(aisle = fct_reorder(aisle, number_of_items_ordered)) %>% 
+  filter(number_of_items_ordered > 10000) %>%
   plot_ly(
-    x = ~street, y = ~score,  type = "scatter", mode = "markers")
+    x = ~number_of_items_ordered, y = ~aisle, color = ~aisle, colors = "BrBG", type = 'bar') %>%
+  layout(
+    xaxis = list(title = "Number of items ordered"),
+    yaxis = list(title = "Aisle names"),
+    legend = list(orientation = 'h')
+  )
 ```
 
 Column {data-width=400}
 -----------------------------------------------------------------------
 
-### Chart B
+### Chart B: Number of purchases of fresh vegetables on each day of week
 
 ```{r}
-nyc_airbnb %>% 
-  mutate(neighbourhood = fct_reorder(neighbourhood, price)) %>% 
-  plot_ly(y = ~price, color = ~neighbourhood, type = "box",
-          colors = "Set2")
+instacart %>% 
+  mutate(
+    order_dow = case_when(
+      order_dow == '0' ~ 'Sunday',
+      order_dow == '1' ~ 'Monday',
+      order_dow == '2' ~ 'Tuesday',
+      order_dow == '3' ~ 'Wednesday',
+      order_dow == '4' ~ 'Thursday',
+      order_dow == '5' ~ 'Friday',
+      order_dow == '6' ~ 'Saturday',
+    )
+  ) %>% 
+  filter(aisle == 'fresh vegetables') %>% 
+  count(order_dow, name = 'day_of_week') %>%
+  mutate(order_dow = fct_reorder(order_dow, -day_of_week)) %>% 
+  plot_ly(
+    x = ~order_dow,  y = ~day_of_week, color = ~order_dow, colors = "Set2", type = 'bar') %>%
+  layout(
+    xaxis = list(title = "Day of week"),
+    yaxis = list(title = "Number of purchase"),
+    legend = list(orientation = 'h')
+  )
 ```
 
-### Chart C
+### Chart C: Order hour of fresh vegetables on each day of week
 
 ```{r}
-nyc_airbnb %>% 
-  count(neighbourhood) %>% 
-  mutate(neighbourhood = fct_reorder(neighbourhood, n)) %>% 
-  plot_ly(x = ~neighbourhood, y = ~n, color = ~neighbourhood, type = "bar")
+instacart %>% 
+  mutate(
+    order_dow = case_when(
+      order_dow == '0' ~ 'Sunday',
+      order_dow == '1' ~ 'Monday',
+      order_dow == '2' ~ 'Tuesday',
+      order_dow == '3' ~ 'Wednesday',
+      order_dow == '4' ~ 'Thursday',
+      order_dow == '5' ~ 'Friday',
+      order_dow == '6' ~ 'Saturday',
+    )
+  ) %>% 
+  filter(aisle == 'fresh vegetables') %>% 
+  plot_ly(
+    y = ~order_hour_of_day, x = ~order_dow, type = 'box', color = ~order_dow) %>%
+  layout(
+    xaxis = list(title = "Day of week"),
+    yaxis = list(title = "Order hour of day"),
+    legend = list(orientation = 'h')
+  )
 ```
 
