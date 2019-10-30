@@ -3,7 +3,7 @@ title: "My dashboard"
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns
-    vertical_layout: fill
+    vertical_layout: scroll
 ---
 
 ```{r setup, include=FALSE}
@@ -68,7 +68,7 @@ instacart %>%
 
 ```{r}
 instacart %>% 
-  mutate(
+   mutate(
     order_dow = case_when(
       order_dow == '0' ~ 'Sunday',
       order_dow == '1' ~ 'Monday',
@@ -77,7 +77,8 @@ instacart %>%
       order_dow == '4' ~ 'Thursday',
       order_dow == '5' ~ 'Friday',
       order_dow == '6' ~ 'Saturday',
-    )
+    ),
+    order_dow = factor(order_dow, levels = c('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'))
   ) %>% 
   filter(aisle == 'fresh vegetables') %>% 
   plot_ly(
