@@ -10,7 +10,7 @@ output:
 
 ## Education
 
-*May 2021*, **Master of Science in Biostatistics**, theory and method tack
+*May 2021*, **Master of Science in Biostatistics**, theory and method track
 
 Columbia University, Mailman School of Public Health, NY, US
 
