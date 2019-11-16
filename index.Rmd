@@ -10,7 +10,7 @@ output:
 <center><img src="image/welcome.jpg" style="width:100%"></center>
 
 
-## Things about me
+### About me
 
 Hi, this is Junxian Chen, a current Master student studying biostatistics at [Columbia University Mailman School of Public Health](https://www.mailman.columbia.edu)!
 
@@ -23,14 +23,14 @@ At present, I have solid knowledge in statistics inlcuding conducting hypothesis
 In my spare time, I love watching [YouTube](https://www.youtube.com). Please feel free to share with me your favorite YouTube channels!
 
 
-## My experiences
+### My experiences
 
 Want to learn more about my experiences?
 
 Sure! You can learn more about me and see my past academic and professional experience [here](about_page.html)!
 
 
-## Data visualization
+### Projects and visualization samples
 
 Come and see some great data visualization examples!
 
@@ -41,8 +41,16 @@ The 'Dashboard' will give you an awesome dashboard showing data information of o
 The 'Plotly Example Code' will provide you some example codes about how to make plots with interactivity in R using the 'plotly' package.
 
 
-## Contact me
+### Contact me
 
-If you would like to contact me, please don't hesitate to click the buttoms at <font size="3" color="red">top right corner</font> to send me an email. Also, feel free to visit my Github and Linkedln page and get connection with me!
+Junxian Chen \
+Department of Biostatistics \
+Columbia Mailman School of Public Health \
+722 West 168th Street \
+New York, New York 10032
+
+Email: junxian.chen2@columbia.edu
+
+If you would like to contact me, please don't hesitate to send me an email. Also, feel free to visit my Github and Linkedln page to get connection with me!
 
 

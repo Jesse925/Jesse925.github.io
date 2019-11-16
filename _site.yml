@@ -1,18 +1,19 @@
-name: "Yay internet!"
+name: "Junxian Chen"
 output_dir: "."
 navbar:
   title: "Home"
-  right:
-    - text: "About Me"
-      href: about_page.html
+  left:
     - text: "Data Visualization"
       menu: 
       - text: "Dashboard"
         href: dashboard.html
       - text: "Plotly Example Code"
         href: plotly.html
-    - icon: fa-envelope fa-lg
-      href: mailto:<jc5314@cumc.columbia.edu>
+  right:
+    - text: "CV"
+      href: about_page.html
+    - icon: fa-paper-plane fa-lg
+      href: mailto:<junxian.chen2@columbia.edu>
     - icon: fa-github fa-lg
       href: http://github.com/Jesse925/
     - icon: fa-linkedin fa-lg
@@ -20,3 +21,5 @@ navbar:
 output:
   html_document:
     theme: flatly
+    include:
+      after_body: footer.html
