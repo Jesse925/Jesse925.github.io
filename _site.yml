@@ -11,8 +11,10 @@ navbar:
       menu: 
       - text: "Plotly Example Code"
         href: plotly.html
-      - text: "Dashboard Example"
+      - text: "Dashboard Example 1"
         href: dashboard.html
+      - text: "Dashboard Example 2"
+        href: dashboard2.html
   right:
     - text: "CV"
       href: about_page.html
