@@ -3,4 +3,13 @@ title: "Projects"
 output: html_document
 ---
 
+### Selected Projects:
+
+* [Project 1: Investigation for validity of data analyses in a published article on *Nature Scientific Reports* ](p8105_mtp_jc5314.html) (Click to view the investigated [article](https://www.nature.com/articles/s41598-018-21625-1))
+
+
+</br>
+
+### Selected Homeworks:
+
 Coming soon...

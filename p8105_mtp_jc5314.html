@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="by Junxian Chen" />
+
+<meta name="date" content="2019-10-18" />
+
+<title>Investigation for validity of data analyses in a published article on Nature Scientific Reports</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Home</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="projects.html">Projects</a>
+</li>
+<li>
+  <a href="data_science_notes.html">Data Science Notes</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Data Visualization
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="plotly.html">Plotly Example Code</a>
+    </li>
+    <li>
+      <a href="dashboard.html">Dashboard Example</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="about_page.html">CV</a>
+</li>
+<li>
+  <a href="mailto:&lt;junxian.chen2@columbia.edu&gt;">
+    <span class="fa fa-paper-plane fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="http://github.com/Jesse925/">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://www.linkedin.com/in/junxian-chen-0419b8181/">
+    <span class="fa fa-linkedin fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Investigation for validity of data analyses in a published article on <em>Nature Scientific Reports</em></h1>
+<h4 class="author">by Junxian Chen</h4>
+<h4 class="date">10/18/2019</h4>
+
+</div>
+
+
+<div id="introduction" class="section level2">
+<h2>Introduction:</h2>
+<p>In 2018, Nature Scientific Reports published an <a href="https://www.nature.com/articles/s41598-018-21625-1">article</a> by Australian researchers published describing the relationship between posture and “enlarged protuberances”, especially among younger subjects. In this study, the researchers analyzed data from individuals with different ages and sex, and concluded that prominent exostosis were more prevalent in young adults than older groups. However, skepticism arose about this study and a published author correction indicated errors existed in the original work. In this project, dataset from this study was used to test whether issues exist and reproduced results are consistent with that reported in the article.</p>
+</div>
+<div id="dataset" class="section level2">
+<h2>1. Dataset</h2>
+<div id="description" class="section level3">
+<h3>1.1 Description</h3>
+<pre class="r"><code>raw_data = 
+  read_excel(&quot;./data/p8105_mtp_data.xlsx&quot;, skip = 8)</code></pre>
+<pre class="r"><code>mtp_data =   
+  raw_data %&gt;% 
+  janitor::clean_names() %&gt;% 
+  replace_na(list(eop_size_mm = 0, eop_shape = 0)) %&gt;% 
+  mutate(
+    sex = as.character(sex),
+    age = as.integer(age),
+    age_group = case_when(
+      age_group %in% c(&#39;6&#39;, &#39;7&#39;, &#39;8&#39;) ~ &#39;6+&#39;, 
+      TRUE ~ age_group ),
+    age_group = factor(age_group, levels = c(&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6+&#39;)),
+    eop_size = factor(eop_size, levels = c(&#39;0&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;)),
+    eop_visibility_classification = factor(eop_visibility_classification, levels = c(&#39;0&#39;, &#39;1&#39;, &#39;2&#39;)),
+    eop_shape = as.character(eop_shape),
+    fhp_category = factor(fhp_category, levels = c(&#39;0&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;))
+  )
+
+str(mtp_data)</code></pre>
+<pre><code>## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    1221 obs. of  9 variables:
+##  $ sex                          : chr  &quot;1&quot; &quot;1&quot; &quot;0&quot; &quot;1&quot; ...
+##  $ age                          : int  18 26 22 20 27 28 17 21 25 30 ...
+##  $ age_group                    : Factor w/ 6 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,..: 2 2 2 2 2 2 1 2 2 2 ...
+##  $ eop_size_mm                  : num  14.8 17.1 0 23.9 0 7.9 6.4 9.4 0 16.5 ...
+##  $ eop_size                     : Factor w/ 6 levels &quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,..: 3 4 1 5 1 2 2 2 1 4 ...
+##  $ eop_visibility_classification: Factor w/ 3 levels &quot;0&quot;,&quot;1&quot;,&quot;2&quot;: 3 3 2 3 1 3 3 3 1 3 ...
+##  $ eop_shape                    : chr  &quot;3&quot; &quot;3&quot; &quot;0&quot; &quot;1&quot; ...
+##  $ fhp_size_mm                  : num  34.7 32.9 28.1 11 19.3 27.6 30.6 27.8 26.2 21 ...
+##  $ fhp_category                 : Factor w/ 8 levels &quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,..: 4 4 3 2 2 3 4 3 3 3 ...</code></pre>
+<p>In the data cleaning, missing values were filled based on given information, variable types were modified and orders were given to factor variables. Individuals older than 60 were all assigned as ‘6+’ under the <code>age_group</code> variables to facilitate further analyses.</p>
+<p>The resulting dataset <code>mtp_data</code> contains 1221 observations (i.e. the number of participants) and 9 variables. Key variables: The average <strong>age</strong> was 45.5118755. The average <strong>EOP size</strong> was 6.8330549 mm. The average <strong>FHP size</strong> was 26.1013416 mm. <code>NA</code> exist in the <code>fhp_size_mm</code> and <code>eop_shape</code>. Since no information was provided, <code>NA</code>’s here were left blank.</p>
+<p>A table below shows the age and gender distribution.</p>
+<pre class="r"><code>mtp_data %&gt;% 
+  mutate(
+    age_group = case_when(
+      age_group == &#39;1&#39; ~ &#39;less than 18&#39;,
+      age_group == &#39;2&#39; ~ &#39;18-30&#39;,
+      age_group == &#39;3&#39; ~ &#39;31-40&#39;,
+      age_group == &#39;4&#39; ~ &#39;41-50&#39;,
+      age_group == &#39;5&#39; ~ &#39;51-60&#39;,
+      age_group == &#39;6+&#39; ~ &#39;larger than 60&#39;
+    )
+  ) %&gt;% 
+  group_by(sex, age_group) %&gt;% 
+  summarize(n = n()) %&gt;%
+  pivot_wider(
+    names_from = sex,
+    values_from = n
+  ) %&gt;% 
+  knitr::kable(
+    col.names = c(&#39;Age&#39;, &#39;Female&#39;, &#39;Male&#39;),
+  )</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Age</th>
+<th align="right">Female</th>
+<th align="right">Male</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">18-30</td>
+<td align="right">151</td>
+<td align="right">152</td>
+</tr>
+<tr class="even">
+<td align="left">31-40</td>
+<td align="right">102</td>
+<td align="right">102</td>
+</tr>
+<tr class="odd">
+<td align="left">41-50</td>
+<td align="right">106</td>
+<td align="right">101</td>
+</tr>
+<tr class="even">
+<td align="left">51-60</td>
+<td align="right">99</td>
+<td align="right">101</td>
+</tr>
+<tr class="odd">
+<td align="left">larger than 60</td>
+<td align="right">155</td>
+<td align="right">150</td>
+</tr>
+<tr class="even">
+<td align="left">less than 18</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="issues" class="section level3">
+<h3>1.2 Issues</h3>
+<pre class="r"><code>mtp_data %&gt;% 
+  ggplot(aes(x = age_group, y = age, color = age_group)) +
+  geom_point() +
+  geom_hline(yintercept = c(18, 31, 41, 51, 61), color = &#39;red&#39;, linetype = &#39;dotted&#39;) + 
+  xlab(&#39;Age Group&#39;) +
+  ylab(&#39;Age (years)&#39;) +
+  scale_color_hue(name = &quot;age group&quot;) +
+  scale_x_discrete(
+    labels = c(&quot;&lt;18&#39;s&quot;, &quot;18-29 years&quot;,&quot;30&#39;s&quot;, &quot;40&#39;s&quot;, &quot;50&#39;s&quot;, &quot;&gt;60&#39;s&quot;)) +
+  scale_color_hue(name = &quot;age group&quot;,
+                  labels = c(&quot;&lt;18&#39;s&quot;, &quot;18-29 years&quot;,&quot;30&#39;s&quot;, &quot;40&#39;s&quot;, &quot;50&#39;s&quot;, &quot;&gt;60&#39;s&quot;))</code></pre>
+<p><img src="p8105_mtp_jc5314_files/figure-html/unnamed-chunk-5-1.png" width="90%" /></p>
+<ul>
+<li>An outlier in ‘&lt;18’s’ group indicates a person older than 18 was mistakenly labeled into this group.</li>
+</ul>
+<pre class="r"><code>mtp_data %&gt;% 
+  ggplot(aes(x = eop_size, y = eop_size_mm, color = eop_size)) +
+  geom_point() +
+  geom_hline(yintercept = c(5, 10, 15, 20, 25), color = &#39;red&#39;, linetype = &#39;dotted&#39;) + 
+  xlab(&#39;EOP Size Group&#39;) +
+  ylab(&#39;EOP Size (mm)&#39;) +
+  scale_color_hue(name = &quot;eop size group&quot;)</code></pre>
+<p><img src="p8105_mtp_jc5314_files/figure-html/unnamed-chunk-6-1.png" width="90%" /></p>
+<ul>
+<li>Misclassifications existed in EOP size group, especially in group 1, 3, 4, 5.</li>
+</ul>
+<pre class="r"><code>row_na = which(is.na(pull(mtp_data, eop_size)))
+raw_data[row_na,] %&gt;% 
+  knitr::kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Sex</th>
+<th align="right">Age</th>
+<th align="left">Age group</th>
+<th align="right">EOP size (mm)</th>
+<th align="left">EOP size</th>
+<th align="right">EOP visibility Classification</th>
+<th align="right">EOP Shape</th>
+<th align="right">FHP size (mm)</th>
+<th align="left">FHP Category</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">62</td>
+<td align="left">6</td>
+<td align="right">15</td>
+<td align="left">14.6</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="right">40.8</td>
+<td align="left">4</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>NA</code> in x-axis was due to an abnormal value ‘14.6’ in ‘EOP size’ in raw dataset which supposed to be 0 ~ 5.</p>
+<pre class="r"><code>mtp_data %&gt;% 
+  ggplot(aes(x = eop_visibility_classification, y = eop_size_mm, color = eop_visibility_classification)) +
+  geom_point() +
+  geom_hline(yintercept = c(0, 5), color = &#39;red&#39;, linetype = &#39;dotted&#39;) + 
+  xlab(&#39;EOP Visibility Classification&#39;) +
+  ylab(&#39;EOP Size (mm)&#39;) +
+  scale_color_hue(name = &quot;EOP visibility classification&quot;)</code></pre>
+<p><img src="p8105_mtp_jc5314_files/figure-html/unnamed-chunk-8-1.png" width="90%" /></p>
+<ul>
+<li>Misclassifications existed in all three groups in EOP visibility classification.</li>
+</ul>
+<pre class="r"><code>mtp_data %&gt;% 
+  ggplot(aes(x = fhp_category, y = fhp_size_mm, color = fhp_category)) +
+  geom_point() +
+  geom_hline(yintercept = c(0, 10, 20, 30, 40, 50, 60, 70), color = &#39;red&#39;, linetype = &#39;dotted&#39;) + 
+  xlab(&#39;FHP Size Group&#39;) +
+  ylab(&#39;FHP Size (mm)&#39;) +
+  scale_color_hue(name = &quot;FHP size group&quot;)</code></pre>
+<p><img src="p8105_mtp_jc5314_files/figure-html/unnamed-chunk-9-1.png" width="90%" /></p>
+<ul>
+<li>Misclassifications existed in FHP size group, especially in group 1, 2, 4.</li>
+</ul>
+<pre class="r"><code>row_na = which(is.na(pull(mtp_data, fhp_category)))
+raw_data[row_na,] %&gt;% 
+  knitr::kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Sex</th>
+<th align="right">Age</th>
+<th align="left">Age group</th>
+<th align="right">EOP size (mm)</th>
+<th align="left">EOP size</th>
+<th align="right">EOP visibility Classification</th>
+<th align="right">EOP Shape</th>
+<th align="right">FHP size (mm)</th>
+<th align="left">FHP Category</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="right">51</td>
+<td align="left">5</td>
+<td align="right">NA</td>
+<td align="left">0</td>
+<td align="right">0</td>
+<td align="right">NA</td>
+<td align="right">30.3</td>
+<td align="left">30.8</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>NA</code> in the x-axis was due to an abnormal value ‘30.8’ in ‘FHP Category’ in raw dataset which supposed to be 0 ~ 7.</p>
+</div>
+</div>
+<div id="visualization-improvement" class="section level2">
+<h2>2. Visualization Improvement</h2>
+<pre class="r"><code>fhp_plot =
+  mtp_data %&gt;% 
+  filter(age_group != &#39;1&#39;) %&gt;% 
+  drop_na(fhp_size_mm) %&gt;% 
+  ggplot(aes(x = age_group, y = fhp_size_mm, fill = sex)) +
+  geom_boxplot() +
+  stat_summary(
+    fun.y = mean, aes(colour = &quot;Mean&quot;), 
+    geom = &quot;point&quot;, 
+    shape = 18, 
+    size = 3,
+    position = position_dodge(width = 0.75)) +
+  stat_summary(
+    fun.data = mean_se, 
+    geom = &quot;errorbar&quot;,
+    width = 0.15,
+    position = position_dodge(width = 0.75)) +
+  scale_fill_hue(
+    name = &quot;Sex&quot;, 
+    labels = c(&quot;Females&quot;, &quot;Males&quot;)) +
+  scale_colour_manual(
+    values = c(&quot;Mean&quot; = &quot;darkred&quot;), 
+    labs(colour = &#39;&#39;)) +
+  xlab(&#39;Age Group (years)&#39;) +
+  ylab(&#39;FHP Size (mm)&#39;) +
+  scale_x_discrete(
+    labels = c(&quot;18-29 years&quot;,&quot;30&#39;s&quot;, &quot;40&#39;s&quot;, &quot;50&#39;s&quot;, &quot;&gt;60&#39;s&quot;))</code></pre>
+<pre class="r"><code>eeop_plot = 
+  mtp_data %&gt;% 
+  filter(age_group != &#39;1&#39;) %&gt;% 
+  mutate(
+    eeop = case_when(
+      eop_size_mm &gt; 10 ~ &#39;y&#39;,
+      eop_size_mm &lt;= 10 ~ &#39;n&#39;
+    )
+  ) %&gt;% 
+  group_by(age_group, sex) %&gt;% 
+  count(eeop) %&gt;%
+  mutate(rate = prop.table(n)) %&gt;% 
+  filter(eeop == &#39;y&#39;) %&gt;% 
+  ggplot(aes(y = rate, x = age_group)) +
+  geom_line(aes(group = sex, color = sex)) +
+  geom_point() +
+  scale_color_hue(
+    name = &quot;Sex&quot;, 
+    labels = c(&quot;Females&quot;, &quot;Males&quot;)) +
+  xlab(&#39;Age Group (years)&#39;) +
+  ylab(&#39;EEOP Rate (%)&#39;) +
+  scale_x_discrete(
+    labels = c(&quot;18-29 years&quot;,&quot;30&#39;s&quot;, &quot;40&#39;s&quot;, &quot;50&#39;s&quot;, &quot;&gt;60&#39;s&quot;))</code></pre>
+<pre class="r"><code># create a two-panel figure and show the plot
+
+fhp_plot / eeop_plot</code></pre>
+<p><img src="p8105_mtp_jc5314_files/figure-html/unnamed-chunk-13-1.png" width="90%" /></p>
+<p>From upper panel, mean value equals to median in most of the age groups, indicating a non-skewed distributions in those data. For females in 30’s, 50’s, &gt;60’s group, data distributions were right-skewed. Also, the males had relatively larger FHP size than females.</p>
+<p>From lower panel, overall trend of EEOP rate decreased first and then increased. It had largest rate in 18-29 years group and lowest rate in 40’s group. Also, EEOP rates in males were higher than that in females at all age groups.</p>
+<pre class="r"><code>fhp_eop_plot = 
+  mtp_data %&gt;% 
+  filter(age_group != &#39;1&#39;) %&gt;% 
+  drop_na(fhp_size_mm) %&gt;% 
+  filter(eop_size_mm != 0) %&gt;% 
+  ggplot(aes(x = fhp_size_mm, y = eop_size_mm, color = sex)) +
+  geom_point() +
+  geom_smooth(
+    method = &quot;lm&quot;, 
+    color = &#39;black&#39;,
+    se = FALSE) +
+  facet_grid(
+    sex ~ age_group, 
+    labeller = as_labeller(c(&#39;0&#39; = &#39;Female&#39;, &#39;1&#39; = &#39;Male&#39;, &#39;2&#39; = &#39;18-29 years&#39;, 
+                             &#39;3&#39; = &quot;30&#39;s&quot;, &#39;4&#39; = &quot;40&#39;s&quot;, &#39;5&#39; = &quot;50&#39;s&quot;, &#39;6+&#39; = &quot;&gt;60&#39;s&quot;))) +
+  xlab(&#39;FHP Size (mm)&#39;) +
+  ylab(&#39;EOP Size (mm)&#39;) +
+  scale_color_hue(
+    name = &quot;Sex&quot;, 
+    labels = c(&quot;Females&quot;, &quot;Males&quot;))
+
+fhp_eop_plot</code></pre>
+<p><img src="p8105_mtp_jc5314_files/figure-html/unnamed-chunk-14-1.png" width="90%" /></p>
+<p>For male group, the EOP size and FHP size had slightly positive relationships in all age groups. However, for female group, the relationships were not identical among different age groups.</p>
+</div>
+<div id="reproduce-reported-results" class="section level2">
+<h2>3. Reproduce Reported Results</h2>
+<pre class="r"><code>mtp_data %&gt;% 
+  mutate(
+    age_group = case_when(
+      age_group == &#39;1&#39; ~ &#39;less than 18&#39;,
+      age_group == &#39;2&#39; ~ &#39;18-30&#39;,
+      age_group == &#39;3&#39; ~ &#39;31-40&#39;,
+      age_group == &#39;4&#39; ~ &#39;41-50&#39;,
+      age_group == &#39;5&#39; ~ &#39;51-60&#39;,
+      age_group == &#39;6+&#39; ~ &#39;larger than 60&#39;
+    )
+  ) %&gt;% 
+  group_by(age_group) %&gt;% 
+  summarize(n = n()) %&gt;% 
+  knitr::kable(
+    col.names = c(&#39;Age Group&#39;, &#39;Sample Size&#39;)
+  )</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Age Group</th>
+<th align="right">Sample Size</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">18-30</td>
+<td align="right">303</td>
+</tr>
+<tr class="even">
+<td align="left">31-40</td>
+<td align="right">204</td>
+</tr>
+<tr class="odd">
+<td align="left">41-50</td>
+<td align="right">207</td>
+</tr>
+<tr class="even">
+<td align="left">51-60</td>
+<td align="right">200</td>
+</tr>
+<tr class="odd">
+<td align="left">larger than 60</td>
+<td align="right">305</td>
+</tr>
+<tr class="even">
+<td align="left">less than 18</td>
+<td align="right">2</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Sample sizes in each age group from available data were not consistent with authors stated.</li>
+</ul>
+<pre class="r"><code># overall mean
+
+mean(pull(mtp_data, fhp_size_mm), na.rm = TRUE)</code></pre>
+<pre><code>## [1] 26.10134</code></pre>
+<pre class="r"><code># mean and std by sex group
+
+mtp_data %&gt;% 
+  mutate(
+    sex = case_when(
+      sex == &#39;0&#39; ~ &#39;Female&#39;,
+      sex == &#39;1&#39; ~ &#39;Male&#39;
+    )
+  ) %&gt;%
+  group_by(sex) %&gt;% 
+  summarize(
+    maen = mean(fhp_size_mm, na.rm = TRUE), 
+    sd = sd(fhp_size_mm, na.rm = TRUE)
+  ) %&gt;% 
+  knitr::kable(
+    col.names = c(&#39;Sex&#39;, &#39;Mean (FHP size)&#39;, &#39;Standard Deviation (FHP size)&#39;)
+  ) </code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Sex</th>
+<th align="right">Mean (FHP size)</th>
+<th align="right">Standard Deviation (FHP size)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Female</td>
+<td align="right">23.72580</td>
+<td align="right">10.61789</td>
+</tr>
+<tr class="even">
+<td align="left">Male</td>
+<td align="right">28.51234</td>
+<td align="right">14.66670</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Reported mean and standard deviations for FHP size were consistent with that in available data.</li>
+</ul>
+<pre class="r"><code>mtp_data %&gt;% 
+  mutate(
+    eeop = case_when(
+      eop_size_mm &gt; 10 ~ &#39;EEOP&#39;,
+      eop_size_mm &lt;= 10 ~ &#39;Not EEOP&#39;
+    )
+  ) %&gt;% 
+  count(eeop) %&gt;%
+  mutate(rate = prop.table(n)) %&gt;% 
+  knitr::kable(
+    col.names = c(&#39;EEOP or not&#39;, &#39;Number&#39;, &#39;Prevalence&#39;)
+  )</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">EEOP or not</th>
+<th align="right">Number</th>
+<th align="right">Prevalence</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">EEOP</td>
+<td align="right">392</td>
+<td align="right">0.3210483</td>
+</tr>
+<tr class="even">
+<td align="left">Not EEOP</td>
+<td align="right">829</td>
+<td align="right">0.6789517</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>EEOP: When bony outgrowths exceeded 10 mm in size.</li>
+<li>Variable used to evaluate the prevalence of EEOP was <code>eop_size_mm</code>. The EEOP prevalence from available data was 32%, which has 1% difference from what authors reported.</li>
+</ul>
+<pre class="r"><code>fhp_violin = 
+  mtp_data %&gt;% 
+  filter(age_group != &#39;1&#39;) %&gt;% 
+  drop_na(fhp_category) %&gt;% 
+  ggplot(aes(x = age_group, y = fhp_size_mm)) +
+  geom_violin() +
+  xlab(&#39;Age Group&#39;) +
+  ylab(&#39;FHP Size (mm)&#39;) +
+  scale_x_discrete(
+    labels = c(&quot;18-29 years&quot;,&quot;30&#39;s&quot;, &quot;40&#39;s&quot;, &quot;50&#39;s&quot;, &quot;&gt;60&#39;s&quot;))
+  
+fhp_col = 
+  mtp_data %&gt;% 
+  filter(age_group != &#39;1&#39;) %&gt;% 
+  drop_na(fhp_category) %&gt;% 
+  group_by(age_group) %&gt;% 
+  count(fhp_category) %&gt;% 
+  mutate(rate = prop.table(n)) %&gt;%  
+  ggplot(aes(x = fhp_category, y = rate)) +
+  geom_col() +
+  xlab(&#39;FHP Categroy&#39;) +
+  ylab(&#39;Percentage&#39;) +
+  facet_grid(~age_group) 
+
+fhp_violin / fhp_col</code></pre>
+<p><img src="p8105_mtp_jc5314_files/figure-html/unnamed-chunk-18-1.png" width="90%" /></p>
+<pre class="r"><code>mtp_data %&gt;% 
+  filter(age_group != &#39;1&#39;) %&gt;% 
+  drop_na(fhp_category) %&gt;% 
+  group_by(age_group) %&gt;% 
+  count(fhp_category) %&gt;% 
+  mutate(rate = prop.table(n)) %&gt;%
+  filter(age_group == &#39;6+&#39; &amp; fhp_category %in% c(&#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;)) %&gt;% 
+  summarize(sum = sum(rate)) %&gt;% 
+  knitr::kable(
+    col.names = c(&#39;Age Group&#39;, &#39;Percentage of FHP &gt;40 mm&#39;)
+  )</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Age Group</th>
+<th align="right">Percentage of FHP &gt;40 mm</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">6+</td>
+<td align="right">0.3245902</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>In older age group, more people had higher FHP size and the percentages of large-FHP categories increased. Thus, the broad trends are consistent with the article. However, based on available data, the percentage of FHP &gt;40 mm observed is 32.5%, which is not consistent with the article.</li>
+</ul>
+</div>
+<div id="discussions" class="section level2">
+<h2>4. Discussions</h2>
+<p>Based on the available data, lots of misclassification were found in category variables and mistakes were found in data entry, which made the data analyses in original report questionable. Besides, some statistical values were found not consistent with that reported in the article. Although board trends were consistent with the article that younger individuals had higher EEOP rates, we still cannot conclude cell phones cause hron growth. Extra data showing the prevalence of cell-phones usage among different age groups will be necessary to better address such hypothesis.</p>
+</div>
+
+<br><br>
+
+<footer>
+
+    <p class="copyright text-muted" align="center">Copyright &copy; 2019 Junxian Chen</p>
+
+</footer>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
