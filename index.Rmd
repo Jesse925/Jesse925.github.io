@@ -1,5 +1,5 @@
 ---
-title: "Welcome to Junxian's website!"
+title: "Welcome to Junxian (Jesse) 's Website"
 output: 
   html_document:
     toc: true
@@ -7,39 +7,44 @@ output:
 ---
 
 
-<center><img src="image/welcome.jpg" style="width:100%"></center>
+<center><img src="image/welcome.jpg" style="width:90%"></center>
 
+</br>
 
 ### About me
 
-Hi, this is Junxian Chen, a current Master student studying biostatistics at [Columbia University Mailman School of Public Health](https://www.mailman.columbia.edu)!
+Hi, this is Junxian Chen, a current Master of Science student studying biostatistics at [Columbia University Mailman School of Public Health](https://www.mailman.columbia.edu)!
+<center><img src="image/mailman.png" style="width:30%"></center>
 
-<center><img src="image/mailman.png" style="width:50%"></center>
+I love doing statistics and data analyses, and aim to develop a career in the field of data science. 
 
-I love doing data science and aim to develop a career in the field of data science. 
+At present, I have solid **knowledge in statistics** including causal inference and regression, time-series analysis, high-dimensional data analysis, etc. Besides, I got plenty of **training in programming**, especially in R, in which I learned to perform data wrangling, pipelining, visualizations, modeling, and produce analysis reports, etc. I also have **experience in machine learning**. In a year-long project, I built and trained an artificial neural network using Python successfully to solve a scientific problem. 
 
-At present, I have solid knowledge in statistics inlcuding conducting hypothesis tests, time-series analysis, high-dimensional data analysis, etc. I also got sufficient training in programming, especially in R and Python. Besides taking courses, I have participated in multiple academic research projects with professors and researchers. During those projects, I helped develop statistical methodology, conduct statistical analysis, and design algorithms for simulations.
-
-In my spare time, I love watching [YouTube](https://www.youtube.com). Please feel free to share with me your favorite YouTube channels!
-
-
-### My experiences
+Besides taking courses, I have participated in multiple **scientific research projects** with professors and researchers. During those projects, I helped develop statistical methodology, conduct statistical analysis, and design algorithms for simulations.
 
 Want to learn more about my experiences?
 
-Sure! You can learn more about me and see my past academic and professional experience [here](about_page.html)!
+Sure! You can learn more about me and see my resume [here](about_page.html)!
 
+</br>
 
-### Projects and visualization samples
+### Selected Projects 
 
-Come and see some great data visualization examples!
+You can view my selected projects and homeworks in data analyses [here](projects.html) or click the <font size="3" color="black">'Project'</font> buttom on the site navigation bar.
 
-Please click the <font size="3" color="black">'Data Visualization'</font> buttom on the <font size="3" color="red">site navigation bar</font>. You will see a drop-down menu contains 'Dashboard' and 'Plotly Example Code'. 
+</br>
 
-The 'Dashboard' will give you an awesome dashboard showing data information of over 3 million online grocery orders from more than 200,000 Instacart users in 2017. 
+### Data Science Notes
 
-The 'Plotly Example Code' will provide you some example codes about how to make plots with interactivity in R using the 'plotly' package.
+You can view some data science notes in R [here](data_science_notes.html) or click the <font size="3" color="black">'Data Science Notes'</font> buttom on the site navigation bar.
 
+</br>
+
+### Data visualization examples
+
+You can view some data visualization examples in R by clicking the <font size="3" color="black">'Data Visualization'</font> buttom on the site navigation bar. You will see a drop-down menu contains 'Plotly Example Code' and 'Dashboard Example'. 
+
+</br>
 
 ### Contact me
 
