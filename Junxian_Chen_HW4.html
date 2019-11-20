@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Junxian Chen (jc5314)" />
+
+<meta name="date" content="2019-11-12" />
+
+<title>Biostatistics Method Homework</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Home</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="projects.html">Projects</a>
+</li>
+<li>
+  <a href="data_science_notes.html">Data Science Notes</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Data Visualization
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="plotly.html">Plotly Example Code</a>
+    </li>
+    <li>
+      <a href="dashboard.html">Dashboard Example 1</a>
+    </li>
+    <li>
+      <a href="dashboard2.html">Dashboard Example 2</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="about_page.html">CV</a>
+</li>
+<li>
+  <a href="mailto:&lt;junxian.chen2@columbia.edu&gt;">
+    <span class="fa fa-paper-plane fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="http://github.com/Jesse925/">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://www.linkedin.com/in/junxian-chen-0419b8181/">
+    <span class="fa fa-linkedin fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Biostatistics Method Homework</h1>
+<h4 class="author">Junxian Chen (jc5314)</h4>
+<h4 class="date">11/12/2019</h4>
+
+</div>
+
+
+<div id="problem-1" class="section level1">
+<h1>Problem 1</h1>
+<ol style="list-style-type: lower-alpha">
+<li>Write the Least Squares line equation and show that it always goes through the point (<span class="math inline">\(\bar{X}, \bar{Y}\)</span>).</li>
+</ol>
+<p>Least Squares line equation:</p>
+<p><span class="math display">\[\begin{aligned}
+Y_{i} &amp;= \hat{\beta}_{0} + \hat{\beta}_{1} X_{i} \\
+      &amp;= (\overline{Y}-\hat{\beta}_{1} \overline{X}) + \hat{\beta}_{1} X_{i} \\
+      &amp;= (\overline{Y}-\frac{\sum_{i=1}^{n} X_{i} Y_{i}-n \overline{X Y}}{\sum_{i=1}^{n} X_{i}^{2}-n \bar{X}^{2}} \overline{X}) + \frac{\sum_{i=1}^{n} X_{i} Y_{i}-n \overline{X Y}}{\sum_{i=1}^{n} X_{i}^{2}-n \bar{X}^{2}} X_{i}
+\end{aligned}\]</span></p>
+<p>Plug <span class="math inline">\(X_{i} = \overline{X}\)</span> into the equation, we can get:</p>
+<p><span class="math display">\[\begin{aligned}
+(\overline{Y}-\frac{\sum_{i=1}^{n} X_{i} Y_{i}-n \overline{X Y}}{\sum_{i=1}^{n} X_{i}^{2}-n \bar{X}^{2}} \overline{X}) + \frac{\sum_{i=1}^{n} X_{i} Y_{i}-n \overline{X Y}}{\sum_{i=1}^{n} X_{i}^{2}-n \bar{X}^{2}} X_{i} &amp;= (\overline{Y}-\frac{\sum_{i=1}^{n} X_{i} Y_{i}-n \overline{X Y}}{\sum_{i=1}^{n} X_{i}^{2}-n \bar{X}^{2}} \overline{X}) + \frac{\sum_{i=1}^{n} X_{i} Y_{i}-n \overline{X Y}}{\sum_{i=1}^{n} X_{i}^{2}-n \bar{X}^{2}} \overline{X} \\
+&amp;= \overline{Y} - 0 \\
+&amp;= \overline{Y}
+\end{aligned}\]</span></p>
+<p>Thus, the Least Squares line always goes through the point (<span class="math inline">\(\overline{X},\overline{Y}\)</span>).</p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Show that <span class="math inline">\(corr(e_i, \hat{Y}_{i}) = 0\)</span>.</li>
+</ol>
+<p> Proof of <span class="math inline">\(\sum_{i=1}^{n} e_{i} X_{i}=0\)</span>:</p>
+<p>Firstly, we have <span class="math display">\[\begin{aligned}
+\sum_{i=1}^{n} e_{i} X_{i}&amp;=\sum_{i=1}^{n}\left(Y_{i}-\hat{\beta}_{0}-\hat{\beta}_{1} X_{i}\right)\left(X_{i}\right) \\
+&amp;=\sum_{i=1}^{n}\left(Y_{i}-\left(\bar{Y}-\hat{\beta}_{1} \bar{X}\right)-\hat{\beta}_{1} X_{i}\right)\left(X_{i}\right) \\
+&amp;=\sum_{i=1}^{n}\left(Y_{i}-\bar{Y}+\hat{\beta}_{1} \bar{X}-\hat{\beta}_{1} X_{i}\right)\left(X_{i}\right) \\
+&amp;=\sum_{i=1}^{n}\left(Y_{i}-\bar{Y}\right)\left(X_{i}\right)+\hat{\beta}_{1} \sum_{i=1}^{n}\left(\bar{X}-X_{i}\right)\left(X_{i}\right)
+\end{aligned}\]</span></p>
+<p>Replace <span class="math inline">\(\bar{X}\)</span> and <span class="math inline">\(\bar{Y}\)</span> by</p>
+<p><span class="math display">\[\begin{aligned}
+\bar{Y}=\frac{\sum_{i=1}^{n} Y_{i}}{n} \\
+\bar{X}=\frac{\sum_{i=1}^{n} X_{i}}{n}
+\end{aligned}\]</span></p>
+<p>Then, we get <span class="math display">\[\begin{aligned}
+\sum_{i=1}^{n} e_{i} X_{i}&amp;=\sum_{i=1}^{n}\left(Y_{i}-\frac{\sum_{i=1}^{n} Y_{i}}{n}\right)\left(X_{i}\right)+\hat{\beta}_{1} \sum_{i=1}^{n}\left(\frac{\sum_{i=1}^{n} X_{i}}{n}-X_{i}\right)\left(X_{i}\right) \\
+&amp;= \sum_{i=1}^{n} X_{i} Y_{i}-\frac{\sum_{i=1}^{n} Y_{i} \sum_{i=1}^{n} X_{i}}{n} + \hat{\beta}_{1}\left(\frac{\left(\sum_{i=1}^{n} X_{i}\right)^{2}-n \sum_{i=1}^{n} X_{i}^{2}}{n}\right) \\
+&amp;= \frac{n \sum_{i=1}^{n} X_{i} Y_{i}-\sum_{i=1}^{n} Y_{i} \sum_{i=1}^{n} X_{i}}{n}+\hat{\beta}_{1} \frac{\left(\sum_{i=1}^{n} X_{i}\right)^{2}-n \sum_{i=1}^{n} X_{i}^{2}}{n}
+\end{aligned}\]</span></p>
+<p>Replace <span class="math inline">\(\hat{\beta}_{1}\)</span> by the estimated result in LSE <span class="math display">\[\begin{aligned}
+\hat{\beta}_{1}=\frac{n \sum_{i=1}^{n} X_{i} Y_{i}-\sum_{i=1}^{n} X_{i} \sum_{i=1}^{n} Y_{i}}{n \sum_{i=1}^{n} X_{i}^{2}-\left(\sum_{i=1}^{n} X_{i}\right)^{2}}
+\end{aligned}\]</span></p>
+<p>Then, we get <span class="math display">\[\begin{aligned}
+\sum_{i=1}^{n} e_{i} X_{i}&amp;=\frac{n \sum_{i=1}^{n} X_{i} Y_{i}-\sum_{i=1}^{n} Y_{i} \sum_{i=1}^{n} X_{i}}{n} +\frac{n \sum_{i=1}^{n} X_{i} Y_{i}-\sum_{i=1}^{n} X_{i} \sum_{i=1}^{n} Y_{i}}{n \sum_{i=1}^{n} X_{i}^{2}-\left(\sum_{i=1}^{n} X_{i}\right)^{2}} \times \frac{\left(\sum_{i=1}^{n} X_{i}\right)^{2}-n \sum_{i=1}^{n} X_{i}^{2}}{n} \\
+&amp;=\frac{n \sum_{i=1}^{n} X_{i} Y_{i}-\sum_{i=1}^{n} Y_{i} \sum_{i=1}^{n} X_{i}}{n}-\frac{n \sum_{i=1}^{n} X_{i} Y_{i}-\sum_{i=1}^{n} X_{i} \sum_{i=1}^{n} Y_{i}}{n} \\
+&amp;=\frac{n \sum_{i=1}^{n} X_{i} Y_{i}-\sum_{i=1}^{n} Y_{i} \sum_{i=1}^{n} X_{i}-n \sum_{i=1}^{n} X_{i} Y_{i}+\sum_{i=1}^{n} X_{i} \sum_{i=1}^{n} Y_{i}}{n} \\
+&amp;= 0
+\end{aligned}\]</span></p>
+<p></p>
+<p>Based on the covariance equation for discrete variables, we have</p>
+<p><span class="math display">\[\begin{aligned}
+\operatorname{cov}(e_{i}, \hat{Y}_i) &amp;= \frac{1}{n} \sum_{i=1}^{n}\left(e_{i}-E(e)\right)\left(\hat{Y}_i-E(\hat{Y})\right) \\
+&amp;= \frac{1}{n} \sum_{i=1}^{n}\left(e_{i}\hat{Y}_i-e_{i}E(\hat{Y})-E(e)\hat{Y}_i+E(e)E(\hat{Y}) \right)
+\end{aligned}\]</span></p>
+<p>Because <span class="math display">\[\begin{aligned}
+E(e) = E(Y-\hat{Y}) &amp;= E(\beta_0+\beta_1X - \hat\beta_0-\hat\beta_1X)  \\
+&amp;= \beta_0+\beta_1X - E(\hat\beta_0)-E(\hat\beta_1)X \\
+&amp;= \beta_0+\beta_1X - \beta_0-\beta_1X \\
+&amp;= 0
+\end{aligned}\]</span></p>
+<p>Therefore, we can get <span class="math display">\[\begin{aligned}
+\operatorname{cov}(e_{i}, \hat{Y}_i) &amp;=\frac{1}{n} \sum_{i=1}^{n}\left(e_{i}\hat{Y}_i-e_{i}E(\hat{Y})-E(e)\hat{Y}_i+E(e)E(\hat{Y}) \right) \\
+&amp;= \frac{1}{n} \sum_{i=1}^{n}\left(e_{i}\hat{Y}_i-e_{i}E(\hat{Y})\right) \\
+&amp;= \frac{1}{n} \sum_{i=1}^{n}\left(e_{i}\hat{Y}_i\right)-\frac{1}{n} \sum_{i=1}^{n}\left(e_{i}E(\hat{Y})\right) \\
+&amp;= \frac{1}{n} \sum_{i=1}^{n}\left(e_{i}\hat{Y}_i\right)-\frac{E(\hat{Y})}{n} \sum_{i=1}^{n}\left(e_{i}\right)
+\end{aligned}\]</span></p>
+<p>Also, we know that <span class="math display">\[\begin{aligned}
+\sum_{i=1}^{n}\left(e_{i}\right) &amp;=  \sum_{i=1}^{n}\left(Y_i -\hat{Y}_i\right) \\
+&amp;=\sum_{i=1}^{n}\left(\beta_0+\beta_1X_i-\hat\beta_0-\hat\beta_1X_i\right) \\
+&amp;= n\beta_0+\beta_1\sum_{i=1}^{n}X_i-n\hat\beta_0-\hat\beta_1\sum_{i=1}^{n}X_i \\
+&amp;= n\beta_0+n\beta_1\bar{X}-n\hat\beta_0-n\hat\beta_1\bar{X}
+\end{aligned}\]</span></p>
+<p>From part(a) of this question, we know that the LSE regression line always goes through the point (<span class="math inline">\(\bar{X}, \bar{Y}\)</span>), thus, we have <span class="math display">\[\begin{aligned}
+\sum_{i=1}^{n}\left(e_{i}\right) &amp;=n\beta_0+n\beta_1\bar{X}-n\hat\beta_0-n\hat\beta_1\bar{X} \\
+&amp;= \bar{Y} - \bar{Y} \\
+&amp;= 0
+\end{aligned}\]</span></p>
+<p>Therefore, we can get <span class="math display">\[\begin{aligned}
+\operatorname{cov}(e_{i}, \hat{Y}_i) &amp;= \frac{1}{n} \sum_{i=1}^{n}\left(e_{i}\hat{Y}_i\right)-\frac{E(\hat{Y})}{n} \sum_{i=1}^{n}\left(e_{i}\right) \\
+&amp;= \frac{1}{n} \sum_{i=1}^{n}\left(e_{i}\hat{Y}_i\right) \\
+&amp;= \frac{1}{n} \sum_{i=1}^{n}\left(e_{i}(\hat\beta_0+\hat\beta_1X_i)\right) \\
+&amp;= \frac{\hat\beta_0}{n} \sum_{i=1}^{n}(e_{i}) + \frac{\hat\beta_1}{n}\sum_{i=1}^{n}(e_{i}X_{i})
+\end{aligned}\]</span></p>
+<p>Since <span class="math inline">\(\sum_{i=1}^{n}(e_{i})=0\)</span> and we have proved in STEP 1 that <span class="math inline">\(\sum_{i=1}^{n}(e_{i}X_{i})=0\)</span>, thus we get <span class="math display">\[\begin{aligned}
+\operatorname{cov}(e_{i}, \hat{Y}_i) &amp;= 0 + 0 \\
+&amp;= 0
+\end{aligned}\]</span></p>
+<p>Finally, we can obatain that <span class="math display">\[\begin{aligned}
+\operatorname{corr}(e_{i}, \hat{Y}_i) &amp;= \frac{\operatorname{cov}(e_{i}, \hat{Y}_i)}{\sqrt{\operatorname{var}(e_i)\operatorname{var}(\hat{Y}_i)}} \\
+&amp;= 0
+\end{aligned}\]</span></p>
+<p> The underlying process of the data is very noisy or the prediction values are small compared to the errors.</p>
+<p> The first simulated formula has a small coefficient and results a correlated residuals with fitted values. The second simulated formula has a larger coefficient and results a less correlated residuals with fitted values.</p>
+<pre class="r"><code>e &lt;- rnorm(100)
+x &lt;- rnorm(100)
+
+par(mfrow = c(1,2))
+
+y1 = 1 + 0.5*x + e
+fit_y1 = lm(y1 ~ x)
+
+plot(x, fitted(fit_y1), type = &#39;l&#39;)
+points(x, y1, col = &#39;red&#39;)
+plot(residuals(fit_y1) ~ y1, xlab = &quot;y1&quot;, ylab = &quot;Residuals&quot;)</code></pre>
+<p><img src="Junxian_Chen_HW4_files/figure-html/unnamed-chunk-2-1.png" width="80%" /></p>
+<pre class="r"><code>y2 = 1 + 5*x + e
+fit_y2 = lm(y2~x)
+
+plot(x, fitted(fit_y2), type = &#39;l&#39;)
+points(x, y2, col = &#39;red&#39;)
+plot(residuals(fit_y2) ~ y2, xlab = &quot;y2&quot;, ylab = &quot;Residuals&quot;)</code></pre>
+<p><img src="Junxian_Chen_HW4_files/figure-html/unnamed-chunk-2-2.png" width="80%" /></p>
+</div>
+<div id="problem-2" class="section level1">
+<h1>Problem 2</h1>
+<ol style="list-style-type: lower-alpha">
+<li>For LS estimation, an estimate <span class="math inline">\(\hat{\beta}\)</span> is the LS estimate of <span class="math inline">\(\beta\)</span> if and only if <span class="math display">\[\begin{aligned}
+(\mathrm{Y}-\mathbf{X} \hat{\beta})^{\prime}(\mathrm{Y}-\mathbf{X} \hat{\beta})=\min (\mathrm{Y}-\mathbf{X} \beta)^{\prime}(\mathrm{Y}-\mathbf{X} \beta)
+\end{aligned}\]</span></li>
+</ol>
+<p>Let the sum of squares of the residuals as a function of <span class="math inline">\(\beta\)</span> <span class="math display">\[\begin{aligned}
+S(\beta) &amp;= (\mathrm{Y}-\mathbf{X} \beta)^{\prime}(\mathrm{Y}-\mathbf{X} \beta) \\
+         &amp;= \mathrm{Y}^{\prime}\mathrm{Y}-\mathrm{Y}^{\prime} X \beta-\beta^{\prime} X^{\prime} \mathrm{Y}+\beta^{\prime} X^{\prime} X \beta
+\end{aligned}\]</span></p>
+<p>The derivative of this function is <span class="math display">\[\begin{aligned}
+\frac{\partial S}{\partial \beta} &amp;= \frac{\partial (\mathrm{Y}^{\prime}\mathrm{Y}-\mathrm{Y}^{\prime} X \beta-\beta^{\prime} X^{\prime} \mathrm{Y}+\beta^{\prime} X^{\prime} X \beta)}{\partial \beta}
+\end{aligned}\]</span></p>
+<p>Based on the laws of derivatives of matrices, we can get <span class="math display">\[\begin{aligned}
+\frac{\partial (\mathrm{Y}^{\prime} X \beta)}{\partial \beta} &amp;= (\mathrm{Y}^{\prime} X)^{\prime} = X^{\prime}\mathrm{Y} \\
+\frac{\partial (\beta^{\prime} X^{\prime} \mathrm{Y})}{\partial \beta} &amp;= \frac{\partial ( (X^{\prime} \mathrm{Y})^{\prime}\beta)}{\partial \beta} = ((X^{\prime} \mathrm{Y})^{\prime})^{\prime} = X^{\prime}\mathrm{Y} \\
+\frac{\partial (\beta^{\prime} X^{\prime} X \beta)}{\partial \beta} &amp;= (X^{\prime}X+(X^{\prime}X)^{\prime})\beta = 2X^{\prime}X\beta
+\end{aligned}\]</span></p>
+<p>Then, we can find the result of the derivative of the S(<span class="math inline">\(\beta\)</span>)</p>
+<p><span class="math display">\[\begin{aligned}
+\frac{\partial S}{\partial \beta} &amp;= \frac{\partial (\mathrm{Y}^{\prime}\mathrm{Y}-\mathrm{Y}^{\prime} X \beta-\beta^{\prime} X^{\prime} \mathrm{Y}+\beta^{\prime} X^{\prime} X \beta)}{\partial \beta} \\
+&amp;= 0 -X^{\prime}\mathrm{Y} -X^{\prime}\mathrm{Y} + 2X^{\prime}X\beta \\
+&amp;= -2X^{\prime}\mathrm{Y} + 2X^{\prime}X\beta
+\end{aligned}\]</span></p>
+<p>To find the minimum of S(<span class="math inline">\(\beta\)</span>), we need to set the derivative of this function equals to zero</p>
+<p><span class="math display">\[\begin{aligned}
+-2X^{\prime}\mathrm{Y} + 2X^{\prime}X\beta &amp;= 0 \\
+X^{\prime}X\beta &amp;= X^{\prime}\mathrm{Y} \\
+\end{aligned}\]</span></p>
+<p>Thus, we can obtain the estimates for the model coefficients</p>
+<p><span class="math display">\[\begin{aligned}
+&amp;\hat{\beta}=\left(\mathbf{X}^{\prime} \mathbf{X}\right)^{-1} \mathbf{X}^{\prime} \mathrm{Y}=\left(\hat{\beta}_{0}, \hat{\beta}_{1}\right)^{\prime}, \\
+&amp;assume\ \left(\mathbf{X}^{\prime} \mathbf{X}\right)^{-1}\ is\ non-singular
+\end{aligned}\]</span></p>
+<p>Now check the second derivative of S(<span class="math inline">\(\beta\)</span>) <span class="math display">\[\begin{aligned}
+\frac{\partial^{2} S}{\partial \beta\partial \beta^{\prime}} &amp;= \frac{\partial (-2X^{\prime}\mathrm{Y} + 2X^{\prime}X\beta)}{\partial \beta} \\
+&amp;= 2 X^{\prime} X \\
+&amp;= 2\sum x_{ij}^2 \\
+&amp;\geqslant0
+\end{aligned}\]</span></p>
+<p>Therefore, S(<span class="math inline">\(\beta\)</span>) indeed reaches the global minimum when <span class="math inline">\(\beta=\left(\mathbf{X}^{\prime} \mathbf{X}\right)^{-1} \mathbf{X}^{\prime} \mathrm{Y}\)</span>.</p>
+<p>Then, we can find the expected value of <span class="math inline">\(\hat\beta\)</span> <span class="math display">\[\begin{aligned}
+E[\hat{\beta}] &amp;= E[\left(\mathbf{X}^{\prime} \mathbf{X}\right)^{-1} \mathbf{X}^{\prime} \mathrm{Y}] \\
+&amp;= \left(\mathbf{X}^{\prime} \mathbf{X}\right)^{-1}\mathbf{X}^{\prime} \cdot E[\mathrm{Y}] \\
+&amp;= \left(\mathbf{X}^{\prime} \mathbf{X}\right)^{-1}\mathbf{X}^{\prime} \cdot X\beta \\
+&amp;= \beta
+\end{aligned}\]</span></p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li></li>
+</ol>
+<p><span class="math display">\[\begin{aligned}
+\operatorname{cov}(\hat{\beta}) &amp;= \operatorname{cov}\left[\left(\mathbf{X}^{\prime} \mathbf{X}\right)^{-1} \mathbf{X}^{\prime} \mathrm{Y}\right] \\
+&amp;= \left(\mathbf{X}^{\prime} \mathbf{X}\right)^{-1} \mathbf{X}^{\prime} \cdot \operatorname{Var}(\mathrm{Y})\left[\left(\mathbf{X}^{\prime} \mathbf{X}\right)^{-1} \mathbf{X}^{\prime}\right]^{\prime} \\
+&amp;= \left(\mathbf{X}^{\prime} \mathbf{X}\right)^{-1} \mathbf{X}^{\prime} \cdot\left(\sigma^{2} \cdot \mathbf{I}\right) \cdot \mathbf{X} \cdot \left[\left(\mathbf{X}^{\prime} \mathbf{X}\right)^{-1}\right]^{\prime} \\
+&amp;= \sigma^{2} \cdot \mathbf{I} \cdot \left(\mathbf{X}^{\prime} \mathbf{X}\right)^{-1} \cdot\mathbf{X}^{\prime} \mathbf{X} \cdot\left(\mathbf{X}^{\prime} \mathbf{X}\right)^{-1} \\
+&amp;= \sigma^{2} \left(\mathbf{X}^{\prime} \mathbf{X}\right)^{-1}
+\end{aligned}\]</span></p>
+<p>Because <span class="math display">\[\begin{aligned}
+\left(\mathbf{X}^{\prime} \mathbf{X}\right)^{-1} = \frac{1}{n \sum X_{i}^{2}-\left(\sum X_{i}\right)^{2}}\left[\begin{array}{cc}{\sum X_{i}^{2}} &amp; {-\sum X_{i}} \\ {-\sum X_{i}} &amp; {n}\end{array}\right]
+\end{aligned}\]</span></p>
+<p>Therefore, we can get <span class="math display">\[\begin{aligned}
+\operatorname{cov}(\hat{\beta}) = \left[\begin{array}{cc}{\operatorname{var}(\hat\beta_0)} &amp; {\operatorname{cov}(\hat\beta_0, \hat\beta_1)} \\ {\operatorname{cov}(\hat\beta_1, \hat\beta_0)} &amp; {\operatorname{var}(\hat\beta_1)}\end{array}\right] &amp;= \sigma^{2} \cdot \frac{1}{n \sum X_{i}^{2}-\left(\sum X_{i}\right)^{2}}\left[\begin{array}{cc}{\sum X_{i}^{2}} &amp; {-\sum X_{i}} \\ {-\sum X_{i}} &amp; {n}\end{array}\right] \\
+&amp;= \left[\begin{array}{cc}{\frac{\sigma^{2} \Sigma X_{i}^{2}}{n \Sigma\left(X_{i}-\bar{X}\right)^{2}}} &amp; {\frac{-\bar{X} \sigma^{2}}{\Sigma\left(X_{i}-\bar{X}\right)^{2}}} \\ {\frac{-\bar{X} \sigma^{2}}{\Sigma\left(X_{i}-\bar{X}\right)^{2}}} &amp; {\frac{\sigma^{2}}{\Sigma\left(X_{i}-\bar{X}\right)^{2}}}\end{array}\right]
+\end{aligned}\]</span></p>
+</div>
+<div id="problem-3" class="section level1">
+<h1>Problem 3</h1>
+<p>Firstly, read in the dataset:</p>
+<pre class="r"><code>brain_data = read_excel(&quot;./data/Brain.xlsx&quot;) %&gt;% 
+  janitor::clean_names()</code></pre>
+<ol style="list-style-type: lower-alpha">
+<li>Fit a regression model for the nonhuman data using ln(brain mass) as a predictor.</li>
+</ol>
+<pre class="r"><code>nonhuman_data = brain_data[-1,]
+
+lm_fit = lm(glia_neuron_ratio ~ ln_brain_mass, data = nonhuman_data)
+
+lm_fit %&gt;% broom::tidy() %&gt;% knitr::kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">term</th>
+<th align="right">estimate</th>
+<th align="right">std.error</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">0.1636963</td>
+<td align="right">0.1598687</td>
+<td align="right">1.023942</td>
+<td align="right">0.3220932</td>
+</tr>
+<tr class="even">
+<td align="left">ln_brain_mass</td>
+<td align="right">0.1811304</td>
+<td align="right">0.0360416</td>
+<td align="right">5.025598</td>
+<td align="right">0.0001507</td>
+</tr>
+</tbody>
+</table>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Using the nonhuman primate relationship, what is the predicted glia-neuron ratio for humans, given their brain mass?</li>
+</ol>
+<pre class="r"><code>predict(lm_fit, data.frame(ln_brain_mass = brain_data[1,3]))</code></pre>
+<pre><code>##        1 
+## 1.471458</code></pre>
+<p>Using the data from the dataset (ln(brain mass) = 7.22), the obtained predicted glia-neuron ratio is 1.47.</p>
+<ol start="3" style="list-style-type: lower-alpha">
+<li><p>In this question we only predict a single value, which is the ratio for human brain, therefore, {an interval for the prediction of a single new observation} will be the most-plausible range of values for the prediction.</p></li>
+<li><p>The 95% prediction interval for a single predictor:</p></li>
+</ol>
+<p><span class="math display">\[\begin{aligned}
+\widehat{\beta_{0}}+\widehat{\beta_{1}} X \pm t_{n-2,1-\alpha / 2} \cdot \operatorname{se}\left(\widehat{\beta_{0}}+\widehat{\beta_{1}} X\right)
+\end{aligned}\]</span></p>
+<p><span class="math display">\[\begin{aligned}
+\left.\operatorname{se}\left(\widehat{\beta_{0}}+\widehat{\beta_{1}} X\right)=\sqrt{\operatorname{MSE}\left\{\frac{1}{n}+\left[\left(X-\bar{X}\right)^{2} / \sum_{i=1}^{n}\left(X_{i}-\bar{X}\right)^{2}\right]+1\right.}\right\}
+\end{aligned}\]</span></p>
+<pre class="r"><code>predict(lm_fit, data.frame(ln_brain_mass = brain_data[1,3]), interval = &#39;predict&#39;)</code></pre>
+<pre><code>##        fit      lwr      upr
+## 1 1.471458 1.036047 1.906869</code></pre>
+<p>Based on the results from <code>R</code> function, the 95% prediction interval for the predicted glia-neuron ratio for humans is (1.04 1.91). From the given dataset, the glia-neuron ratio of human brain is given as 1.65. Since 1.65 falls within the 95% confidence interval, the human brain does not have an excessive glia-neuron ratio for its mass compared with other primates.</p>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>The human data point is beyond the data range used to conduct linear regression. Therefore, we do not know what the regression model is where the human data point locates. This may cause the issue that the predicted value and confidence interval for human brain based on this model were not correct at all and lead to the conclusion invalid.</li>
+</ol>
+</div>
+<div id="problem-4" class="section level1">
+<h1>Problem 4</h1>
+<p>Firstly, read in the dataset:</p>
+<pre class="r"><code>heart_data = read_csv(&quot;./data/HeartDisease.csv&quot;) %&gt;% 
+  mutate(gender = as.factor(gender))</code></pre>
+<ol style="list-style-type: lower-alpha">
+<li>Provide a short description of the data set.</li>
+</ol>
+<p>The dataset, which records data of patients who had ischemic heart disease, contains 10 variables and 788 observations. The main outcome is the total cost of services provided to those patients and the main predictor is the number of emergency room (ER) visits. Other important covariates include age, gender, number of complications, and duration of treatment condition.</p>
+<pre class="r"><code>my_controls = tableby.control(total = T,
+                test = F,
+                digits = 2,
+                digits.pct = 2L,
+                numeric.stats = c(&quot;meansd&quot;, &quot;medianrange&quot;, &quot;iqr&quot;), cat.stats = c(&quot;countpct&quot;),
+                stats.labels = list(
+                  meansd = &quot;Mean (SD)&quot;, medianrange = &quot;Median&quot;, iqr = &quot;IQR&quot;,
+                  countpct = &quot;N (%)&quot;)
+                )
+
+my_labels = list(gender = &#39;gender (1:male 0:female)&#39;, totalcost = &#39;total cost&#39;)
+
+tab = tableby( ~ age + gender + totalcost + ERvisits + complications + duration, 
+               data = heart_data, control = my_controls)
+
+summary(tab, text = T, total = F, labelTranslations = my_labels) %&gt;% knitr::kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="left">Overall (N=788)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>age</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td>- Mean (SD)</td>
+<td align="left">58.72 (6.75)</td>
+</tr>
+<tr class="odd">
+<td>- Median</td>
+<td align="left">60.00 (24.00, 70.00)</td>
+</tr>
+<tr class="even">
+<td>- IQR</td>
+<td align="left">9.00</td>
+</tr>
+<tr class="odd">
+<td>gender (1:male 0:female)</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td>- 0</td>
+<td align="left">608 (77.16%)</td>
+</tr>
+<tr class="odd">
+<td>- 1</td>
+<td align="left">180 (22.84%)</td>
+</tr>
+<tr class="even">
+<td>total cost</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td>- Mean (SD)</td>
+<td align="left">2799.96 (6690.26)</td>
+</tr>
+<tr class="even">
+<td>- Median</td>
+<td align="left">507.20 (0.00, 52664.90)</td>
+</tr>
+<tr class="odd">
+<td>- IQR</td>
+<td align="left">1744.32</td>
+</tr>
+<tr class="even">
+<td>ERvisits</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td>- Mean (SD)</td>
+<td align="left">3.43 (2.64)</td>
+</tr>
+<tr class="even">
+<td>- Median</td>
+<td align="left">3.00 (0.00, 20.00)</td>
+</tr>
+<tr class="odd">
+<td>- IQR</td>
+<td align="left">3.00</td>
+</tr>
+<tr class="even">
+<td>complications</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td>- Mean (SD)</td>
+<td align="left">0.06 (0.25)</td>
+</tr>
+<tr class="even">
+<td>- Median</td>
+<td align="left">0.00 (0.00, 3.00)</td>
+</tr>
+<tr class="odd">
+<td>- IQR</td>
+<td align="left">0.00</td>
+</tr>
+<tr class="even">
+<td>duration</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td>- Mean (SD)</td>
+<td align="left">164.03 (120.92)</td>
+</tr>
+<tr class="even">
+<td>- Median</td>
+<td align="left">165.50 (0.00, 372.00)</td>
+</tr>
+<tr class="odd">
+<td>- IQR</td>
+<td align="left">239.25</td>
+</tr>
+</tbody>
+</table>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Investigate the shape of the distribution for variable ‘total cost’ and try different transformations</li>
+</ol>
+<pre class="r"><code>heart_data %&gt;% 
+  ggplot(aes(totalcost)) + 
+  geom_density()</code></pre>
+<p><img src="Junxian_Chen_HW4_files/figure-html/unnamed-chunk-9-1.png" width="80%" /></p>
+<p>As shown in the plot, the shape of distribution for variable ‘total cost’ is right-skewed and does not follow the normal distribution.</p>
+<p>Using natural logarithm transformation (because data in ‘totalcost’ contain ‘0’ values, here add ‘1’ to each data to avoid issue when taking log):</p>
+<pre class="r"><code>heart_data %&gt;% 
+  ggplot(aes(log(totalcost + 1))) + 
+  geom_density()</code></pre>
+<p><img src="Junxian_Chen_HW4_files/figure-html/unnamed-chunk-10-1.png" width="80%" /></p>
+<p>Using n-th root transformation:</p>
+<pre class="r"><code>heart_data %&gt;% 
+  ggplot(aes((totalcost)^(1/8))) + 
+  geom_density()</code></pre>
+<p><img src="Junxian_Chen_HW4_files/figure-html/unnamed-chunk-11-1.png" width="80%" /></p>
+<p>The logarithm transformation seems better and it will be used in the following answers.</p>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Create a new variable called ‘comp_bin’ by dichotomizing ‘complications’: 0 if no complications, and 1 otherwise.</li>
+</ol>
+<pre class="r"><code>heart_data = 
+  heart_data %&gt;% 
+  mutate(
+    comp_bin = case_when(
+    complications == &#39;0&#39; ~ &#39;0&#39;,
+    complications != &#39;0&#39; ~ &#39;1&#39;
+    )
+  )</code></pre>
+<ol start="4" style="list-style-type: lower-alpha">
+<li></li>
+</ol>
+<pre class="r"><code>slr_fit = lm(log(totalcost + 1) ~ ERvisits, data = heart_data)
+
+slr_fit %&gt;% summary()</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = log(totalcost + 1) ~ ERvisits, data = heart_data)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -6.6532 -1.1230  0.0309  1.2797  4.2964 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  5.52674    0.10510  52.584   &lt;2e-16 ***
+## ERvisits     0.22529    0.02432   9.264   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.799 on 786 degrees of freedom
+## Multiple R-squared:  0.09844,    Adjusted R-squared:  0.09729 
+## F-statistic: 85.82 on 1 and 786 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code>heart_data %&gt;% 
+  add_predictions(slr_fit) %&gt;% 
+  ggplot(aes(x = ERvisits, y = log(totalcost + 1))) + geom_point() + 
+  geom_line(aes(y = pred), color = &quot;red&quot;)</code></pre>
+<p><img src="Junxian_Chen_HW4_files/figure-html/unnamed-chunk-14-1.png" width="80%" /></p>
+<p><strong>Comments:</strong> Based on the regression summary, the value of slope is significant and we can say there is a linear relationship between the ER visits and log(total cost + 1).</p>
+<p><strong>Interpretation of the slope:</strong></p>
+<p><span class="math inline">\((e^{0.22529} - 1) \times 100\% = 25.3\%\)</span></p>
+<p>For every unit increase in the number of ER visits, the estimated total cost increases by about 25.3 percent, on average.</p>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Fit a multiple linear regression (MLR) with ‘comp_bin’ and ‘ERvisits’ as predictors.</li>
+</ol>
+<ol style="list-style-type: lower-roman">
+<li></li>
+</ol>
+<pre class="r"><code>lm(log(totalcost + 1) ~ ERvisits + comp_bin + ERvisits*comp_bin, data = heart_data) %&gt;% 
+  summary() %&gt;% broom::tidy()</code></pre>
+<pre><code>## # A tibble: 4 x 5
+##   term               estimate std.error statistic   p.value
+##   &lt;chr&gt;                 &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)          5.49      0.105      52.3  1.04e-257
+## 2 ERvisits             0.209     0.0249      8.41 1.90e- 16
+## 3 comp_bin1            2.19      0.554       3.95 8.47e-  5
+## 4 ERvisits:comp_bin1  -0.0975    0.0963     -1.01 3.11e-  1</code></pre>
+<p>The ‘comp_bin’ is NOT an effect modifier, because the estimated coefficient of the interaction term of ‘ER visit’ and ‘comp_bin’ was not significant.</p>
+<ol start="2" style="list-style-type: lower-roman">
+<li></li>
+</ol>
+<pre class="r"><code>fit1 = lm(log(totalcost + 1) ~ ERvisits, data = heart_data) 
+
+fit1 %&gt;% summary() %&gt;% broom::tidy()</code></pre>
+<pre><code>## # A tibble: 2 x 5
+##   term        estimate std.error statistic   p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)    5.53     0.105      52.6  1.32e-259
+## 2 ERvisits       0.225    0.0243      9.26 1.84e- 19</code></pre>
+<pre class="r"><code>fit2 = lm(log(totalcost + 1) ~ ERvisits + comp_bin, data = heart_data) 
+
+fit2 %&gt;% summary() %&gt;% broom::tidy() </code></pre>
+<pre><code>## # A tibble: 3 x 5
+##   term        estimate std.error statistic   p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)    5.51     0.103      53.6  1.39e-264
+## 2 ERvisits       0.203    0.0241      8.44 1.56e- 16
+## 3 comp_bin1      1.71     0.279       6.11 1.56e-  9</code></pre>
+<p>The ‘comp_bin’ is NOT a confounder. When comparing the regressioin results from the above two models, we can find both the magnitude and direction of the estimated coefficient of ‘ER visit’ did not change very much no matter the ‘comp_bin’ was included in the model or not. Thus, it does not act as a confounder.</p>
+<ol start="3" style="list-style-type: lower-roman">
+<li></li>
+</ol>
+<p>The ANOVA test was conducted to test whether we should include ‘comp_bin’.</p>
+<p>Hypothesis: <span class="math inline">\(H_0:\)</span> small model is better <span class="math inline">\(v.s.\)</span> <span class="math inline">\(H_1:\)</span> large model is better</p>
+<pre class="r"><code>anova(fit1, fit2)</code></pre>
+<pre><code>## Analysis of Variance Table
+## 
+## Model 1: log(totalcost + 1) ~ ERvisits
+## Model 2: log(totalcost + 1) ~ ERvisits + comp_bin
+##   Res.Df    RSS Df Sum of Sq      F    Pr(&gt;F)    
+## 1    786 2544.8                                  
+## 2    785 2429.3  1    115.55 37.339 1.563e-09 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>From the anova results, the p-value was very small (&lt;0.05) and thus we reject the null hypothesis and conclude that the large model is better, which means ‘comp_bin’ should be included in the model.</p>
+<ol start="6" style="list-style-type: lower-alpha">
+<li>Add additional covariates:age, gender, and duration of treatment.</li>
+</ol>
+<ol style="list-style-type: lower-roman">
+<li>Fit a MLR, show the regression results and comment.</li>
+</ol>
+<pre class="r"><code>mlr_fit = lm(log(totalcost + 1) ~ ERvisits + comp_bin + age + gender + duration, 
+             data = heart_data)
+
+mlr_fit %&gt;% summary() </code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = log(totalcost + 1) ~ ERvisits + comp_bin + age + 
+##     gender + duration, data = heart_data)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -5.4711 -1.0340 -0.1158  0.9493  4.3372 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  5.9404610  0.5104064  11.639  &lt; 2e-16 ***
+## ERvisits     0.1745975  0.0225736   7.735 3.20e-14 ***
+## comp_bin1    1.5044946  0.2584882   5.820 8.57e-09 ***
+## age         -0.0206475  0.0086746  -2.380   0.0175 *  
+## gender1     -0.2067662  0.1387002  -1.491   0.1364    
+## duration     0.0057150  0.0004888  11.691  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.624 on 782 degrees of freedom
+## Multiple R-squared:  0.2694, Adjusted R-squared:  0.2647 
+## F-statistic: 57.68 on 5 and 782 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p><strong>Comment:</strong> Based on the summary of the regression results, the variable ‘gender’ is not significant at the 0.05 significance level, indicating differences in gender are not associated with changes in the total cost, while all the other covariates are significant. Therefore, we may consider to remove ‘gender’ from the model while the other covariates are remained.</p>
+<ol start="2" style="list-style-type: lower-roman">
+<li>Compare the SLR and MLR models.</li>
+</ol>
+<p>Conduct ANOVA test:</p>
+<p>Hypothesis: <span class="math inline">\(H_0:\)</span> small model is better <span class="math inline">\(v.s.\)</span> <span class="math inline">\(H_1:\)</span> large model is better</p>
+<pre class="r"><code>anova(slr_fit, mlr_fit)</code></pre>
+<pre><code>## Analysis of Variance Table
+## 
+## Model 1: log(totalcost + 1) ~ ERvisits
+## Model 2: log(totalcost + 1) ~ ERvisits + comp_bin + age + gender + duration
+##   Res.Df    RSS Df Sum of Sq      F    Pr(&gt;F)    
+## 1    786 2544.8                                  
+## 2    782 2062.2  4    482.62 45.753 &lt; 2.2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Make plots for the residuals from both SLR and MLR model:</p>
+<pre class="r"><code>par(mfrow = c(1,2))
+plot(fitted(slr_fit), resid(slr_fit), main = &#39;Simple Linear Regression Model&#39;)
+abline(0, 0)
+
+qqnorm(resid(slr_fit))
+qqline(resid(slr_fit))</code></pre>
+<p><img src="Junxian_Chen_HW4_files/figure-html/unnamed-chunk-21-1.png" width="80%" /></p>
+<pre class="r"><code>par(mfrow = c(1,2))
+plot(fitted(mlr_fit), resid(mlr_fit), main = &#39;Multiple Linear Regression Model&#39;)
+abline(0, 0)
+
+qqnorm(resid(mlr_fit))
+qqline(resid(mlr_fit))</code></pre>
+<p><img src="Junxian_Chen_HW4_files/figure-html/unnamed-chunk-22-1.png" width="80%" /></p>
+<p>From the ANOVA test results, the p-value was very small (&lt;0.05) and thus we reject the null hypothesis and conclude that the large model is better. Also, the adjusted R-squared value of MLR model was higher than the SLR model. Besides, the residual plots from the MLR model look better. Therefore, I would use the MLR model to address the investigator’s objective.</p>
+</div>
+
+<br><br>
+
+<footer>
+
+    <p class="copyright text-muted" align="center">Copyright &copy; 2019 Junxian Chen</p>
+
+</footer>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

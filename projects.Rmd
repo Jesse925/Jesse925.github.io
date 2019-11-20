@@ -1,5 +1,5 @@
 ---
-title: "Projects in Data Analysis"
+title: "Projects in Data Analysis and Biostatistics"
 output: html_document
 ---
 
@@ -17,3 +17,5 @@ output: html_document
 * [Data Manipulation and Visualization](https://github.com/Jesse925/p8105_hw3_jc5314/blob/master/p8105_hw3_jc5314.md)
 
 * [Iteration, List columns, and Simulation](https://github.com/Jesse925/p8105_hw5_jc5314/blob/master/p8105_hw5_jc5314.md)
+
+* [Linear Regression Model: theory and practise](Junxian_Chen_HW4.html)
