@@ -9,7 +9,7 @@ navbar:
       href: data_science_notes.html
     - text: "Data Visualization"
       menu: 
-      - text: "Plotly Example Code"
+      - text: "Plotly Example"
         href: plotly.html
       - text: "Dashboard Example 1"
         href: dashboard.html
