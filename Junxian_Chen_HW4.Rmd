@@ -48,7 +48,7 @@ Thus, the Least Squares line always goes through the point ($\overline{X},\overl
 
 (b) Show that $corr(e_i, \hat{Y}_{i}) = 0$.
 
-\textbf{STEP 1:} Proof of $\sum_{i=1}^{n} e_{i} X_{i}=0$:
+**STEP 1:** Proof of $\sum_{i=1}^{n} e_{i} X_{i}=0$:
 
 Firstly, we have
 $$\begin{aligned}
@@ -85,7 +85,7 @@ $$\begin{aligned}
 &= 0
 \end{aligned}$$
 
-\textbf{STEP 2:}
+**STEP 2:**
 
 Based on the covariance equation for discrete variables, we have
 
@@ -145,9 +145,10 @@ $$\begin{aligned}
 &= 0
 \end{aligned}$$
 
-\textbf{Possible explanations of having a high correlation between residuals and fitted values:} The underlying process of the data is very noisy or the prediction values are small compared to the errors.
+(c)
+**Possible explanations of having a high correlation between residuals and fitted values:** The underlying process of the data is very noisy or the prediction values are small compared to the errors.
 
-\textbf{An example:} The first simulated formula has a small coefficient and results a correlated residuals with fitted values. The second simulated formula has a larger coefficient and results a less correlated residuals with fitted values.
+**An example:** The first simulated formula has a small coefficient and results a correlated residuals with fitted values. The second simulated formula has a larger coefficient and results a less correlated residuals with fitted values.
 
 ```{r}
 e <- rnorm(100)
@@ -286,7 +287,7 @@ predict(lm_fit, data.frame(ln_brain_mass = brain_data[1,3]))
 
 Using the data from the dataset (ln(brain mass) = 7.22), the obtained predicted glia-neuron ratio is 1.47.
 
-(c) In this question we only predict a single value, which is the ratio for human brain,\textbf, therefore, {an interval for the prediction of a single new observation} will be the most-plausible range of values for the prediction.
+(c) In this question we only predict a single value, which is the ratio for human brain, therefore, an interval for the prediction of a single new observation will be the most-plausible range of values for the prediction.
 
 (d) The 95% prediction interval for a single predictor:
 

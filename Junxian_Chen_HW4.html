@@ -359,7 +359,7 @@ Y_{i} &amp;= \hat{\beta}_{0} + \hat{\beta}_{1} X_{i} \\
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Show that <span class="math inline">\(corr(e_i, \hat{Y}_{i}) = 0\)</span>.</li>
 </ol>
-<p> Proof of <span class="math inline">\(\sum_{i=1}^{n} e_{i} X_{i}=0\)</span>:</p>
+<p><strong>STEP 1:</strong> Proof of <span class="math inline">\(\sum_{i=1}^{n} e_{i} X_{i}=0\)</span>:</p>
 <p>Firstly, we have <span class="math display">\[\begin{aligned}
 \sum_{i=1}^{n} e_{i} X_{i}&amp;=\sum_{i=1}^{n}\left(Y_{i}-\hat{\beta}_{0}-\hat{\beta}_{1} X_{i}\right)\left(X_{i}\right) \\
 &amp;=\sum_{i=1}^{n}\left(Y_{i}-\left(\bar{Y}-\hat{\beta}_{1} \bar{X}\right)-\hat{\beta}_{1} X_{i}\right)\left(X_{i}\right) \\
@@ -385,7 +385,7 @@ Y_{i} &amp;= \hat{\beta}_{0} + \hat{\beta}_{1} X_{i} \\
 &amp;=\frac{n \sum_{i=1}^{n} X_{i} Y_{i}-\sum_{i=1}^{n} Y_{i} \sum_{i=1}^{n} X_{i}-n \sum_{i=1}^{n} X_{i} Y_{i}+\sum_{i=1}^{n} X_{i} \sum_{i=1}^{n} Y_{i}}{n} \\
 &amp;= 0
 \end{aligned}\]</span></p>
-<p></p>
+<p><strong>STEP 2:</strong></p>
 <p>Based on the covariance equation for discrete variables, we have</p>
 <p><span class="math display">\[\begin{aligned}
 \operatorname{cov}(e_{i}, \hat{Y}_i) &amp;= \frac{1}{n} \sum_{i=1}^{n}\left(e_{i}-E(e)\right)\left(\hat{Y}_i-E(\hat{Y})\right) \\
@@ -428,8 +428,10 @@ E(e) = E(Y-\hat{Y}) &amp;= E(\beta_0+\beta_1X - \hat\beta_0-\hat\beta_1X)  \\
 \operatorname{corr}(e_{i}, \hat{Y}_i) &amp;= \frac{\operatorname{cov}(e_{i}, \hat{Y}_i)}{\sqrt{\operatorname{var}(e_i)\operatorname{var}(\hat{Y}_i)}} \\
 &amp;= 0
 \end{aligned}\]</span></p>
-<p> The underlying process of the data is very noisy or the prediction values are small compared to the errors.</p>
-<p> The first simulated formula has a small coefficient and results a correlated residuals with fitted values. The second simulated formula has a larger coefficient and results a less correlated residuals with fitted values.</p>
+<ol start="3" style="list-style-type: lower-alpha">
+<li><strong>Possible explanations of having a high correlation between residuals and fitted values:</strong> The underlying process of the data is very noisy or the prediction values are small compared to the errors.</li>
+</ol>
+<p><strong>An example:</strong> The first simulated formula has a small coefficient and results a correlated residuals with fitted values. The second simulated formula has a larger coefficient and results a less correlated residuals with fitted values.</p>
 <pre class="r"><code>e &lt;- rnorm(100)
 x &lt;- rnorm(100)
 
@@ -564,7 +566,7 @@ lm_fit %&gt;% broom::tidy() %&gt;% knitr::kable()</code></pre>
 ## 1.471458</code></pre>
 <p>Using the data from the dataset (ln(brain mass) = 7.22), the obtained predicted glia-neuron ratio is 1.47.</p>
 <ol start="3" style="list-style-type: lower-alpha">
-<li><p>In this question we only predict a single value, which is the ratio for human brain, therefore, {an interval for the prediction of a single new observation} will be the most-plausible range of values for the prediction.</p></li>
+<li><p>In this question we only predict a single value, which is the ratio for human brain, therefore, an interval for the prediction of a single new observation will be the most-plausible range of values for the prediction.</p></li>
 <li><p>The 95% prediction interval for a single predictor:</p></li>
 </ol>
 <p><span class="math display">\[\begin{aligned}
