@@ -11,7 +11,7 @@ output:
 
 </br>
 
-### About me
+### About Me
 
 Hi, this is Junxian Chen, a current Master of Science student studying biostatistics at [Columbia University Mailman School of Public Health](https://www.mailman.columbia.edu)!
 <center><img src="image/mailman.png" style="width:30%"></center>
@@ -28,25 +28,25 @@ Sure! You can learn more about me and see my resume [here](about_page.html)!
 
 </br>
 
-### Selected Projects 
+### <font color="red"> My Projects </font>
 
-You can view my selected projects and homeworks in data analyses [here](projects.html) or click the <font size="3" color="black">'Project'</font> buttom on the site navigation bar.
+You can view my selected projects and homeworks in data analyses [here](projects.html) or click the <font size="3" color="black">'My Projects'</font> buttom on the site navigation bar.
 
 </br>
 
-### Data Science Notes
+### <font color="red"> Data Science Notes </font>
 
 You can view some data science notes in R [here](data_science_notes.html) or click the <font size="3" color="black">'Data Science Notes'</font> buttom on the site navigation bar.
 
 </br>
 
-### Data visualization examples
+### <font color="red"> Data Visualization Examples </font>
 
-You can view some data visualization examples in R by clicking the <font size="3" color="black">'Data Visualization'</font> buttom on the site navigation bar. You will see a drop-down menu contains 'Plotly Example Code' and 'Dashboard Example'. 
+You can view some data visualization examples in R by clicking the <font size="3" color="black">'Data Visualizations'</font> buttom on the site navigation bar. You will see a drop-down menu contains 'Plotly Example Code' and 'Dashboard Example'. 
 
 </br>
 
-### Contact me
+### Contact Me
 
 Junxian Chen \
 Department of Biostatistics \

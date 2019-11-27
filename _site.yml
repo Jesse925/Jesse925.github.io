@@ -7,7 +7,7 @@ navbar:
       href: projects.html
     - text: "Data Science Notes"
       href: data_science_notes.html
-    - text: "Data Visualization"
+    - text: "Data Visualizations"
       menu: 
       - text: "Plotly Example"
         href: plotly.html
