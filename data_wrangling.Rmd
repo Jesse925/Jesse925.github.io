@@ -1,0 +1,201 @@
+---
+title: "Data Manipulation with dplyr"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+
+options(tibble.print_min = 3)
+
+litters_data = read_csv("./data/FAS_litters.csv",
+  col_types = "ccddiiii")
+litters_data = janitor::clean_names(litters_data)
+
+pups_data = read_csv("./data/FAS_pups.csv",
+  col_types = "ciiiii")
+pups_data = janitor::clean_names(pups_data)
+
+```
+
+# 1. Data Manipulations
+
+## Selecting
+
+```{r}
+select(litters_data, group, litter_number, starts_with("pups"))
+
+select(litters_data, litter_number, group, everything())
+
+# remove variable
+select(litters_data, -group)
+
+select(litters_data, litter_number, gd0_weight:pups_born_alive)
+
+# renmae the variable
+select(litters_data, GROUP = group, litter_number)
+
+# just rename the variable but no selection
+rename(litters_data, GROUP = group)
+```
+
+## Filtering
+
+```{r}
+filter(litters_data, group == 'Con7')
+
+filter(litters_data, pups_born_alive < 6)
+
+# group == con7 and/or con8
+filter(litters_data, group %in% c("Con7", "Con8"))
+
+filter(litters_data, group == 'Con7' | group == 'Con8')
+
+filter(litters_data, gd0_weight < gd18_weight)
+
+# don't do this:
+filter(litters_data, !is.na(gd0_weight))
+
+# recommend:
+drop_na(litters_data, gd0_weight)
+```
+
+## Mutate the data
+
+```{r}
+mutate(
+  litters_data, 
+  wt_gain = gd18_weight - gd0_weight,
+  group = str_to_lower(group),
+  group = str_to_upper(group))
+```
+
+## Arrange 
+
+```{r}
+arrange(litters_data, pups_born_alive)
+
+arrange(litters_data, pups_born_alive, gd0_weight)
+```
+
+## An Example
+
+```{r}
+litters_data = 
+  read_csv("./data/FAS_litters.csv", col_types = "ccddiiii") %>%
+  janitor::clean_names() %>%
+  select(-pups_survive) %>%
+  mutate(
+    wt_gain = gd18_weight - gd0_weight,
+    group = str_to_lower(group)) %>% 
+  drop_na(wt_gain)
+
+litters_data
+```
+
+```{r, eval = FALSE}
+litters_data %>% view()
+```
+
+
+# 2. Tidy the Data
+
+```{r}
+pulse_data = 
+  haven::read_sas("./data/public_pulse_data.sas7bdat") %>%
+  janitor::clean_names() %>%
+  pivot_longer(
+    bdi_score_bl:bdi_score_12m,
+    names_to = 'visit',
+    names_prefix = 'bdi_score_',
+    values_to = 'bdi'
+  ) %>%
+  mutate(
+    visit = recode(visit, 'bl' = '00m')
+  )
+
+pulse_data
+```
+
+```{r}
+litters_data = 
+  read_csv("./data/FAS_litters.csv", col_types = "ccddiiii") %>% 
+   janitor::clean_names() %>%
+   separate(col = group, into = c('dose','day_of_tx'), sep = 3)
+```
+
+## Untidy the data
+
+```{r}
+analysis_result = tibble(
+  group = c("treatment", "treatment", "placebo", "placebo"),
+  time = c("pre", "post", "pre", "post"),
+  mean = c(4, 8, 3.5, 4)
+)
+
+analysis_result
+
+pivot_wider(
+  analysis_result, 
+  names_from = "time", 
+  values_from = "mean")
+```
+
+```{r}
+fellowship_ring = 
+  readxl::read_excel("./data/LotR_Words.xlsx", range = "B3:D6") %>%
+  mutate(movie = "fellowship_ring")
+
+two_towers = 
+  readxl::read_excel("./data/LotR_Words.xlsx", range = "F3:H6") %>%
+  mutate(movie = "two_towers")
+
+return_king = 
+  readxl::read_excel("./data/LotR_Words.xlsx", range = "J3:L6") %>%
+  mutate(movie = "return_king")
+
+lotr_tidy = 
+  bind_rows(fellowship_ring, two_towers, return_king) %>%
+  janitor::clean_names() %>%
+  pivot_longer(
+    female:male,
+    names_to = "sex", 
+    values_to = "words") %>%
+  mutate(race = str_to_lower(race)) %>% 
+  select(movie, everything()) 
+
+lotr_tidy
+```
+
+## Joining datasets
+
+```{r}
+pup_data = 
+  read_csv("./data/FAS_pups.csv", col_types = "ciiiii") %>%
+  janitor::clean_names() %>%
+  mutate(sex = recode(sex, `1` = "male", `2` = "female")) 
+
+pup_data
+
+litter_data = 
+  read_csv("./data/FAS_litters.csv", col_types = "ccddiiii") %>%
+  janitor::clean_names() %>%
+  select(-pups_survive) %>%
+  mutate(
+    wt_gain = gd18_weight - gd0_weight,
+    group = str_to_lower(group))
+
+litter_data
+
+fas_data = 
+  left_join(pup_data, litter_data, by = "litter_number") # by = c('xx', 'xx') or by = c('a' = 'b')
+
+fas_data
+
+full_join(pup_data, litter_data, by = 'litter_number')
+```
+

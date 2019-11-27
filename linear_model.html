@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Linear Regression</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Home</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="projects.html">My Projects</a>
+</li>
+<li>
+  <a href="data_science_notes.html">Data Science Notes</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Data Visualization
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="plotly.html">Plotly Example</a>
+    </li>
+    <li>
+      <a href="dashboard.html">Dashboard Example 1</a>
+    </li>
+    <li>
+      <a href="dashboard2.html">Dashboard Example 2</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="about_page.html">CV</a>
+</li>
+<li>
+  <a href="mailto:&lt;junxian.chen2@columbia.edu&gt;">
+    <span class="fa fa-paper-plane fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="http://github.com/Jesse925/">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://www.linkedin.com/in/junxian-chen-0419b8181/">
+    <span class="fa fa-linkedin fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Linear Regression</h1>
+
+</div>
+
+
+<div id="model-fitting" class="section level2">
+<h2>Model Fitting</h2>
+<pre class="r"><code>data(&quot;nyc_airbnb&quot;)
+
+nyc_airbnb = 
+  nyc_airbnb %&gt;% 
+  mutate(stars = review_scores_location / 2) %&gt;% 
+  rename(
+    boro = neighbourhood_group,
+    neighborhood = neighbourhood) %&gt;% 
+  filter(boro != &quot;Staten Island&quot;) %&gt;% 
+  dplyr::select(price, stars, boro, neighborhood, room_type)</code></pre>
+<p>Fit the first linear model:</p>
+<pre class="r"><code>fit = lm(price ~ stars + boro, data = nyc_airbnb)
+
+summary(fit)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = price ~ stars + boro, data = nyc_airbnb)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -169.8  -64.0  -29.0   20.2 9870.0 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)    -70.414     14.021  -5.022 5.14e-07 ***
+## stars           31.990      2.527  12.657  &lt; 2e-16 ***
+## boroBrooklyn    40.500      8.559   4.732 2.23e-06 ***
+## boroManhattan   90.254      8.567  10.534  &lt; 2e-16 ***
+## boroQueens      13.206      9.065   1.457    0.145    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 181.5 on 30525 degrees of freedom
+##   (9962 observations deleted due to missingness)
+## Multiple R-squared:  0.03423,    Adjusted R-squared:  0.03411 
+## F-statistic: 270.5 on 4 and 30525 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code>coef(fit)</code></pre>
+<pre><code>##   (Intercept)         stars  boroBrooklyn boroManhattan    boroQueens 
+##     -70.41446      31.98989      40.50030      90.25393      13.20617</code></pre>
+<p>Tidy the results:</p>
+<pre class="r"><code>fit %&gt;% 
+  broom::tidy() %&gt;% 
+  mutate(
+    term = str_replace(term, &quot;boro&quot;, &quot;Boro:&quot;) 
+  ) %&gt;% 
+  knitr::kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">term</th>
+<th align="right">estimate</th>
+<th align="right">std.error</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">-70.41446</td>
+<td align="right">14.020697</td>
+<td align="right">-5.022180</td>
+<td align="right">0.0000005</td>
+</tr>
+<tr class="even">
+<td align="left">stars</td>
+<td align="right">31.98989</td>
+<td align="right">2.527500</td>
+<td align="right">12.656733</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Boro:Brooklyn</td>
+<td align="right">40.50030</td>
+<td align="right">8.558723</td>
+<td align="right">4.732049</td>
+<td align="right">0.0000022</td>
+</tr>
+<tr class="even">
+<td align="left">Boro:Manhattan</td>
+<td align="right">90.25393</td>
+<td align="right">8.567490</td>
+<td align="right">10.534465</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">Boro:Queens</td>
+<td align="right">13.20617</td>
+<td align="right">9.064879</td>
+<td align="right">1.456850</td>
+<td align="right">0.1451682</td>
+</tr>
+</tbody>
+</table>
+<p>Take a look at factors…</p>
+<pre class="r"><code>nyc_airbnb = 
+  nyc_airbnb %&gt;% 
+  mutate(
+    boro = fct_infreq(boro),  # reorder factor levels based on their frequencies
+    room_type = fct_infreq(room_type))
+
+fit = lm(price ~ stars + boro, data = nyc_airbnb)
+fit %&gt;% broom::glance()</code></pre>
+<pre><code>## # A tibble: 1 x 11
+##   r.squared adj.r.squared sigma statistic   p.value    df  logLik    AIC
+##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt;  &lt;dbl&gt;
+## 1    0.0342        0.0341  182.      271. 6.73e-229     5 -2.02e5 4.04e5
+## # … with 3 more variables: BIC &lt;dbl&gt;, deviance &lt;dbl&gt;, df.residual &lt;int&gt;</code></pre>
+</div>
+<div id="diagnostics" class="section level2">
+<h2>Diagnostics</h2>
+<pre class="r"><code>modelr::add_residuals(nyc_airbnb, fit) %&gt;% 
+  ggplot(aes(x = boro, y = resid)) + 
+  geom_violin() +
+  ylim(-500, 500)</code></pre>
+<pre><code>## Warning: Removed 10202 rows containing non-finite values (stat_ydensity).</code></pre>
+<p><img src="linear_model_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<pre class="r"><code>nyc_airbnb %&gt;% 
+  modelr::add_residuals(fit) %&gt;% 
+  ggplot(aes(x = stars, y = resid)) + 
+  geom_point() +
+  ylim(-500, 500)</code></pre>
+<pre><code>## Warning: Removed 10202 rows containing missing values (geom_point).</code></pre>
+<p><img src="linear_model_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<pre class="r"><code>modelr::add_predictions(nyc_airbnb, fit)</code></pre>
+<pre><code>## # A tibble: 40,492 x 6
+##   price stars boro  neighborhood room_type        pred
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt; &lt;chr&gt;        &lt;fct&gt;           &lt;dbl&gt;
+## 1    99     5 Bronx City Island  Private room     89.5
+## 2   200    NA Bronx City Island  Private room     NA  
+## 3   300    NA Bronx City Island  Entire home/apt  NA  
+## # … with 4.049e+04 more rows</code></pre>
+</div>
+<div id="nesting" class="section level2">
+<h2>Nesting</h2>
+<pre class="r"><code>nyc_airbnb %&gt;% 
+  lm(price ~ stars * boro + room_type * boro, data = .) %&gt;% 
+  broom::tidy() %&gt;% 
+  knitr::kable(digits = 3)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">term</th>
+<th align="right">estimate</th>
+<th align="right">std.error</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">95.694</td>
+<td align="right">19.184</td>
+<td align="right">4.988</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">stars</td>
+<td align="right">27.110</td>
+<td align="right">3.965</td>
+<td align="right">6.838</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left">boroBrooklyn</td>
+<td align="right">-26.066</td>
+<td align="right">25.080</td>
+<td align="right">-1.039</td>
+<td align="right">0.299</td>
+</tr>
+<tr class="even">
+<td align="left">boroQueens</td>
+<td align="right">-4.118</td>
+<td align="right">40.674</td>
+<td align="right">-0.101</td>
+<td align="right">0.919</td>
+</tr>
+<tr class="odd">
+<td align="left">boroBronx</td>
+<td align="right">-5.627</td>
+<td align="right">77.808</td>
+<td align="right">-0.072</td>
+<td align="right">0.942</td>
+</tr>
+<tr class="even">
+<td align="left">room_typePrivate room</td>
+<td align="right">-124.188</td>
+<td align="right">2.996</td>
+<td align="right">-41.457</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left">room_typeShared room</td>
+<td align="right">-153.635</td>
+<td align="right">8.692</td>
+<td align="right">-17.676</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">stars:boroBrooklyn</td>
+<td align="right">-6.139</td>
+<td align="right">5.237</td>
+<td align="right">-1.172</td>
+<td align="right">0.241</td>
+</tr>
+<tr class="odd">
+<td align="left">stars:boroQueens</td>
+<td align="right">-17.455</td>
+<td align="right">8.539</td>
+<td align="right">-2.044</td>
+<td align="right">0.041</td>
+</tr>
+<tr class="even">
+<td align="left">stars:boroBronx</td>
+<td align="right">-22.664</td>
+<td align="right">17.099</td>
+<td align="right">-1.325</td>
+<td align="right">0.185</td>
+</tr>
+<tr class="odd">
+<td align="left">boroBrooklyn:room_typePrivate room</td>
+<td align="right">31.965</td>
+<td align="right">4.328</td>
+<td align="right">7.386</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">boroQueens:room_typePrivate room</td>
+<td align="right">54.933</td>
+<td align="right">7.459</td>
+<td align="right">7.365</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left">boroBronx:room_typePrivate room</td>
+<td align="right">71.273</td>
+<td align="right">18.002</td>
+<td align="right">3.959</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">boroBrooklyn:room_typeShared room</td>
+<td align="right">47.797</td>
+<td align="right">13.895</td>
+<td align="right">3.440</td>
+<td align="right">0.001</td>
+</tr>
+<tr class="odd">
+<td align="left">boroQueens:room_typeShared room</td>
+<td align="right">58.662</td>
+<td align="right">17.897</td>
+<td align="right">3.278</td>
+<td align="right">0.001</td>
+</tr>
+<tr class="even">
+<td align="left">boroBronx:room_typeShared room</td>
+<td align="right">83.089</td>
+<td align="right">42.451</td>
+<td align="right">1.957</td>
+<td align="right">0.050</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>nest_lm_res =
+  nyc_airbnb %&gt;% 
+  nest(data = -boro) %&gt;% 
+  mutate(models = map(data, ~lm(price ~ stars + room_type, data = .x)),
+         models = map(models, broom::tidy)) %&gt;% 
+  dplyr::select(-data) %&gt;% 
+  unnest(models)</code></pre>
+<pre class="r"><code>manhattan_airbnb =
+  nyc_airbnb %&gt;% 
+  filter(boro == &quot;Manhattan&quot;)
+
+manhattan_nest_lm_res =
+  manhattan_airbnb %&gt;% 
+  nest(data = -neighborhood) %&gt;% 
+  mutate(models = map(data, ~lm(price ~ stars + room_type, data = .x)),
+         models = map(models, broom::tidy)) %&gt;% 
+  dplyr::select(-data) %&gt;% 
+  unnest(models)
+
+manhattan_nest_lm_res %&gt;% 
+  filter(str_detect(term, &quot;room_type&quot;)) %&gt;% 
+  ggplot(aes(x = neighborhood, y = estimate)) + 
+  geom_point() + 
+  facet_wrap(~term) + 
+  theme(axis.text.x = element_text(angle = 80, hjust = 1))</code></pre>
+<p><img src="linear_model_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+</div>
+
+<br><br>
+
+<footer>
+
+    <p class="copyright text-muted" align="center">Copyright &copy; 2019 Junxian Chen</p>
+
+</footer>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -3,4 +3,14 @@ title: "Data Science Notes"
 output: html_document
 ---
 
-Coming soon...
+* [Data Wrangling: Munipulate and Tidy the Data](data_wrangling.html)
+
+* [List Columns and Iteration](iteration_list_columns.html)
+
+* [Linear Regression](linear_model.html)
+
+* [Cross Validation and Bootstrap](cross_validation_bootstrap.html)
+
+* [Clustering and Lasso](cluster_lasso.html)
+
+* Coming soon...

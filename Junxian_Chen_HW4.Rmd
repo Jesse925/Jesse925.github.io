@@ -303,11 +303,10 @@ $$\begin{aligned}
 predict(lm_fit, data.frame(ln_brain_mass = brain_data[1,3]), interval = 'predict')
 ```
 
-Based on the results from `R` function, the 95% prediction interval for the predicted glia-neuron ratio for humans is (1.04 1.91). From the given dataset, the glia-neuron ratio of human brain is given as 1.65. Since 1.65 falls within the 95% confidence interval, the human brain does not have an excessive glia-neuron ratio for its mass compared with other primates.
+Based on the results from `R` function, the 95% prediction interval for the predicted glia-neuron ratio for humans is (1.04 1.91). Since the upper limit is as high as 1.91, which is way above allthe other ratios corresponding for primates, human brain have an excessive glia-neuron ratio for its masscompared with other primates.
 
 (e) 
-The human data point is beyond the data range used to conduct linear regression. Therefore, we do not know  what the regression model is where the human data point locates. This may cause the issue that the predicted value and confidence interval for human brain based on this model were not correct at all and lead to the conclusion invalid.
-
+The human data point is beyond the data range used to conduct linear regression. Therefore, we do not know what the regression model is where the human data point locates and are running into the danger of extrapolation. This may cause the issue that the predicted value and prediction interval for human brain based on this model were not correct at all and lead to the conclusion invalid.
 
 # Problem 4
 

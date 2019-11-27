@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Cross Validation and Bootstrap</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Home</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="projects.html">My Projects</a>
+</li>
+<li>
+  <a href="data_science_notes.html">Data Science Notes</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Data Visualization
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="plotly.html">Plotly Example</a>
+    </li>
+    <li>
+      <a href="dashboard.html">Dashboard Example 1</a>
+    </li>
+    <li>
+      <a href="dashboard2.html">Dashboard Example 2</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="about_page.html">CV</a>
+</li>
+<li>
+  <a href="mailto:&lt;junxian.chen2@columbia.edu&gt;">
+    <span class="fa fa-paper-plane fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="http://github.com/Jesse925/">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://www.linkedin.com/in/junxian-chen-0419b8181/">
+    <span class="fa fa-linkedin fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Cross Validation and Bootstrap</h1>
+
+</div>
+
+
+<div id="cross-validation" class="section level1">
+<h1>1. Cross Validation</h1>
+<p>Simulate dataset:</p>
+<pre class="r"><code>nonlin_df = 
+  tibble(
+    id = 1:100,
+    x = runif(100, 0, 1),
+    y = 1 - 10 * (x - .3) ^ 2 + rnorm(100, 0, .3)
+  )
+
+nonlin_df %&gt;% 
+  ggplot(aes(x = x, y = y)) + 
+  geom_point() + theme_bw()</code></pre>
+<p><img src="cross_validation_bootstrap_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Training and testing…</p>
+<pre class="r"><code>train_df = sample_n(nonlin_df, 80)
+test_df = anti_join(nonlin_df, train_df, by = &quot;id&quot;)
+
+ggplot(train_df, aes(x = x, y = y)) + 
+  geom_point() + 
+  geom_point(data = test_df, color = &quot;red&quot;)</code></pre>
+<p><img src="cross_validation_bootstrap_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Fit three models of varying goodness:</p>
+<pre class="r"><code>linear_mod = lm(y ~ x, data = train_df)
+smooth_mod = mgcv::gam(y ~ s(x), data = train_df)
+wiggly_mod = mgcv::gam(y ~ s(x, k = 30), sp = 10e-6, data = train_df)</code></pre>
+<p>Look at some fits…</p>
+<pre class="r"><code>train_df %&gt;% 
+  add_predictions(smooth_mod) %&gt;% 
+  ggplot(aes(x = x, y = y)) + geom_point() + 
+  geom_line(aes(y = pred), color = &quot;red&quot;)</code></pre>
+<p><img src="cross_validation_bootstrap_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<pre class="r"><code>train_df %&gt;% 
+  add_predictions(wiggly_mod) %&gt;% 
+  ggplot(aes(x = x, y = y)) + geom_point() + 
+  geom_line(aes(y = pred), color = &quot;red&quot;)</code></pre>
+<p><img src="cross_validation_bootstrap_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<pre class="r"><code>rmse(linear_mod, test_df)</code></pre>
+<pre><code>## [1] 0.7052956</code></pre>
+<pre class="r"><code>rmse(smooth_mod, test_df)</code></pre>
+<pre><code>## [1] 0.2221774</code></pre>
+<pre class="r"><code>rmse(wiggly_mod, test_df)</code></pre>
+<pre><code>## [1] 0.289051</code></pre>
+<div id="use-the-modelr-package" class="section level3">
+<h3>Use the <code>modelr</code> package</h3>
+<pre class="r"><code>cv_df = 
+  crossv_mc(nonlin_df, 100) %&gt;% 
+  mutate(
+    train = map(train, as_tibble),
+    test = map(test, as_tibble))</code></pre>
+<p>Try fitting the linear model to all of these,,,</p>
+<pre class="r"><code>cv_df = 
+  cv_df %&gt;% 
+  mutate(linear_mod  = map(train, ~lm(y ~ x, data = .x)),
+         smooth_mod  = map(train, ~mgcv::gam(y ~ s(x), data = .x)),
+         wiggly_mod  = map(train, ~gam(y ~ s(x, k = 30), sp = 10e-6, data = .x))) %&gt;% 
+  mutate(rmse_linear = map2_dbl(linear_mod, test, ~rmse(model = .x, data = .y)),
+         rmse_smooth = map2_dbl(smooth_mod, test, ~rmse(model = .x, data = .y)),
+         rmse_wiggly = map2_dbl(wiggly_mod, test, ~rmse(model = .x, data = .y)))</code></pre>
+<pre class="r"><code>cv_df %&gt;% 
+  select(starts_with(&quot;rmse&quot;)) %&gt;% 
+  pivot_longer(
+    everything(),
+    names_to = &quot;model&quot;, 
+    values_to = &quot;rmse&quot;,
+    names_prefix = &quot;rmse_&quot;) %&gt;% 
+  mutate(model = fct_inorder(model)) %&gt;% 
+  ggplot(aes(x = model, y = rmse)) + geom_violin()</code></pre>
+<p><img src="cross_validation_bootstrap_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
+<div id="an-example-child-growth" class="section level3">
+<h3>An Example: Child Growth</h3>
+<pre class="r"><code>child_growth = read_csv(&quot;./data/nepalese_children.csv&quot;)</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   age = col_double(),
+##   sex = col_double(),
+##   weight = col_double(),
+##   height = col_double(),
+##   armc = col_double()
+## )</code></pre>
+<pre class="r"><code>child_growth %&gt;% 
+  ggplot(aes(x = weight, y = armc)) + 
+  geom_point(alpha = .5, color = &#39;blue&#39;)</code></pre>
+<p><img src="cross_validation_bootstrap_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>Add change point model:</p>
+<pre class="r"><code>child_growth =
+  child_growth %&gt;% 
+  mutate(weight_cp = (weight &gt; 7) * (weight - 7))</code></pre>
+<p>Fit models:</p>
+<pre class="r"><code>linear_mod    = lm(armc ~ weight, data = child_growth)
+pwl_mod    = lm(armc ~ weight + weight_cp, data = child_growth)
+smooth_mod = gam(armc ~ s(weight), data = child_growth)</code></pre>
+<pre class="r"><code>child_growth %&gt;% 
+  gather_predictions(linear_mod, pwl_mod, smooth_mod) %&gt;% 
+  mutate(model = fct_inorder(model)) %&gt;% 
+  ggplot(aes(x = weight, y = armc)) + 
+  geom_point(alpha = .5, color = &#39;blue&#39;) +
+  geom_line(aes(y = pred), color = &quot;red&quot;) + 
+  facet_grid(~model)</code></pre>
+<p><img src="cross_validation_bootstrap_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<pre class="r"><code>cv_df =
+  crossv_mc(child_growth, 100) %&gt;% 
+  mutate(
+    train = map(train, as_tibble),
+    test = map(test, as_tibble))</code></pre>
+<pre class="r"><code>cv_df = 
+  cv_df %&gt;% 
+  mutate(linear_mod  = map(train, ~lm(armc ~ weight, data = .x)),
+         pwl_mod     = map(train, ~lm(armc ~ weight + weight_cp, data = .x)),
+         smooth_mod  = map(train, ~gam(armc ~ s(weight), data = as_tibble(.x)))) %&gt;% 
+  mutate(rmse_linear = map2_dbl(linear_mod, test, ~rmse(model = .x, data = .y)),
+         rmse_pwl    = map2_dbl(pwl_mod, test, ~rmse(model = .x, data = .y)),
+         rmse_smooth = map2_dbl(smooth_mod, test, ~rmse(model = .x, data = .y)))</code></pre>
+<pre class="r"><code>cv_df %&gt;% 
+  select(starts_with(&quot;rmse&quot;)) %&gt;% 
+pivot_longer(
+    everything(),
+    names_to = &quot;model&quot;, 
+    values_to = &quot;rmse&quot;,
+    names_prefix = &quot;rmse_&quot;) %&gt;% 
+  mutate(model = fct_inorder(model)) %&gt;% 
+  ggplot(aes(x = model, y = rmse)) + geom_violin()</code></pre>
+<p><img src="cross_validation_bootstrap_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+</div>
+</div>
+<div id="bootstrap" class="section level1">
+<h1>2. Bootstrap</h1>
+<p>Generate two simulated dataset:</p>
+<pre class="r"><code>n_samp = 250
+
+sim_df_const = 
+  tibble(
+    x = rnorm(n_samp, 1, 1),
+    error = rnorm(n_samp, 0, 1),
+    y = 2 + 3 * x + error
+  )
+
+sim_df_nonconst = sim_df_const %&gt;% 
+  mutate(
+  error = error * .75 * x,
+  y = 2 + 3 * x + error
+)</code></pre>
+<p>Plot the simulated data and regression line:</p>
+<pre class="r"><code>sim_df = 
+  bind_rows(const = sim_df_const, nonconst = sim_df_nonconst, .id = &quot;data_source&quot;) 
+
+sim_df %&gt;% 
+  ggplot(aes(x = x, y = y)) + 
+  geom_point(alpha = .5) +
+  stat_smooth(method = &quot;lm&quot;) +
+  facet_grid(~data_source) </code></pre>
+<p><img src="cross_validation_bootstrap_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>Fit two models:</p>
+<pre class="r"><code>lm(y ~ x, data = sim_df_const) %&gt;% 
+  broom::tidy() %&gt;% 
+  knitr::kable(digits = 3)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">term</th>
+<th align="right">estimate</th>
+<th align="right">std.error</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">2.108</td>
+<td align="right">0.086</td>
+<td align="right">24.493</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">x</td>
+<td align="right">3.020</td>
+<td align="right">0.059</td>
+<td align="right">50.963</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>lm(y ~ x, data = sim_df_nonconst) %&gt;% 
+  broom::tidy() %&gt;% 
+  knitr::kable(digits = 3)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">term</th>
+<th align="right">estimate</th>
+<th align="right">std.error</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">2.008</td>
+<td align="right">0.082</td>
+<td align="right">24.546</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">x</td>
+<td align="right">3.103</td>
+<td align="right">0.056</td>
+<td align="right">55.087</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p>Write function to draw a bootstrap sample based on a dataframe</p>
+<pre class="r"><code>boot_sample = function(df) {
+  sample_frac(df, size = 1, replace = TRUE)
+}</code></pre>
+<pre class="r"><code>boot_sample(sim_df_nonconst) %&gt;% 
+  ggplot(aes(x = x, y = y)) + 
+  geom_point(alpha = .5) +
+  stat_smooth(method = &quot;lm&quot;)</code></pre>
+<p><img src="cross_validation_bootstrap_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p>Organize a dataframe</p>
+<pre class="r"><code>boot_straps = 
+  data_frame(
+    strap_number = 1:1000,
+    strap_sample = rerun(1000, boot_sample(sim_df_nonconst))
+  )</code></pre>
+<pre><code>## Warning: `data_frame()` is deprecated, use `tibble()`.
+## This warning is displayed once per session.</code></pre>
+<pre class="r"><code>boot_straps %&gt;% 
+  filter(strap_number %in% 1:3) %&gt;% 
+  unnest(strap_sample) %&gt;% 
+  ggplot(aes(x = x, y = y)) + 
+  geom_point(alpha = .5) +
+  stat_smooth(method = &quot;lm&quot;, se = FALSE) +
+  facet_grid(~strap_number) </code></pre>
+<p><img src="cross_validation_bootstrap_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p>Analyzing bootstrap samples…</p>
+<pre class="r"><code>bootstrap_results = 
+  boot_straps %&gt;% 
+  mutate(
+    models = map(strap_sample, ~lm(y ~ x, data = .x) ),
+    results = map(models, broom::tidy)) %&gt;% 
+  select(-strap_sample, -models) %&gt;% 
+  unnest() %&gt;% 
+  group_by(term) %&gt;% 
+  summarize(boot_se = sd(estimate))</code></pre>
+<pre><code>## Warning: `cols` is now required.
+## Please use `cols = c(results)`</code></pre>
+<pre class="r"><code>bootstrap_results %&gt;% 
+  knitr::kable(digits = 3)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">term</th>
+<th align="right">boot_se</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">0.058</td>
+</tr>
+<tr class="even">
+<td align="left">x</td>
+<td align="right">0.067</td>
+</tr>
+</tbody>
+</table>
+<div id="use-the-modelr-package-1" class="section level3">
+<h3>Use the <code>modelr</code> package</h3>
+<pre class="r"><code>boot_straps = 
+  sim_df_nonconst %&gt;% 
+  modelr::bootstrap(n = 1000)
+
+as_data_frame(boot_straps$strap[[1]])</code></pre>
+<pre><code>## Warning: `as_data_frame()` is deprecated, use `as_tibble()` (but mind the new semantics).
+## This warning is displayed once per session.</code></pre>
+<pre><code>## # A tibble: 250 x 3
+##         x   error      y
+##     &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
+##  1  0.574 -0.148   3.57 
+##  2  1.91  -1.10    6.61 
+##  3  1.11  -0.214   5.10 
+##  4  0.220 -0.213   2.45 
+##  5  1.46   1.19    7.58 
+##  6 -0.409 -0.0107  0.763
+##  7  1.49   1.14    7.62 
+##  8  2.88  -0.620  10.0  
+##  9  1.87  -0.995   6.61 
+## 10  1.26   1.46    7.25 
+## # … with 240 more rows</code></pre>
+</div>
+<div id="an-example-airbnb-data" class="section level3">
+<h3>An Example: Airbnb data</h3>
+<pre class="r"><code>data(&quot;nyc_airbnb&quot;)
+
+nyc_airbnb = 
+  nyc_airbnb %&gt;% 
+  mutate(stars = review_scores_location / 2) %&gt;% 
+  rename(
+    boro = neighbourhood_group,
+    neighborhood = neighbourhood) %&gt;% 
+  filter(boro != &quot;Staten Island&quot;) %&gt;% 
+  select(price, stars, boro, neighborhood, room_type)</code></pre>
+<p>Make a quick plot showing these data, with particular emphasis on the features that interesting in analyzing.</p>
+<pre class="r"><code>nyc_airbnb %&gt;% 
+  ggplot(aes(x = stars, y = price, color = room_type)) + 
+  geom_point() </code></pre>
+<pre><code>## Warning: Removed 9962 rows containing missing values (geom_point).</code></pre>
+<p><img src="cross_validation_bootstrap_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p>Use the bootstrap to examine the distribution of regression coefficients under repeated sampling.</p>
+<pre class="r"><code>nyc_airbnb %&gt;% 
+  filter(boro == &quot;Manhattan&quot;) %&gt;% 
+  modelr::bootstrap(n = 1000) %&gt;% 
+  mutate(
+    models = map(strap, ~ lm(price ~ stars + room_type, data = .x)),
+    results = map(models, broom::tidy)) %&gt;% 
+  select(results) %&gt;% 
+  unnest(results) %&gt;% 
+  filter(term == &quot;stars&quot;) %&gt;% 
+  ggplot(aes(x = estimate)) + geom_density()</code></pre>
+<p><img src="cross_validation_bootstrap_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+</div>
+</div>
+
+<br><br>
+
+<footer>
+
+    <p class="copyright text-muted" align="center">Copyright &copy; 2019 Junxian Chen</p>
+
+</footer>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

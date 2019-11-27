@@ -3,7 +3,7 @@ output_dir: "."
 navbar:
   title: "Home"
   left:
-    - text: "Projects"
+    - text: "My Projects"
       href: projects.html
     - text: "Data Science Notes"
       href: data_science_notes.html
