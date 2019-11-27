@@ -12,7 +12,7 @@ library(tidyverse)
 set.seed(1)
 ```
 
-# List
+# 1. List
 
 ```{r}
 l = list(vec_numeric = 5:8,
@@ -125,7 +125,7 @@ dynamite_reviews = map_df(vec_urls, read_page_reviews)
 ```
 
 
-# List columns
+# 2. List columns
 
 ```{r, message=FALSE}
 weather = 
@@ -161,7 +161,7 @@ weather_nest %>%
   unnest()
 ```
 
-## Operations on lisnt columns
+## Operations on list columns
 
 ```{r}
 central_park_df = 
