@@ -7,6 +7,7 @@ output: html_document
 
 * [Project 1: Investigation for validity of data analyses in a published article on *Nature Scientific Reports* ](p8105_mtp_jc5314.html) (Click to view the investigated [article](https://www.nature.com/articles/s41598-018-21625-1))
 
+* [Project 2: "Don't do drugs!": Exploratory analyses of death related to drug overdose in Connecticut from 2012 to 2018](https://jesse925.github.io/p8105_final_project/) (collaborated with Bingkun Luo, Qimin Zhang, Weiwei Qi, Xinyu Shen)
 
 </br>
 
