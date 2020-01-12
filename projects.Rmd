@@ -9,6 +9,8 @@ output: html_document
 
 * [Project 2: "Don't do drugs!": Exploratory analyses of death related to drug overdose in Connecticut from 2012 to 2018](https://jesse925.github.io/p8105_final_project/) (collaborated with Bingkun Luo, Qimin Zhang, Weiwei Qi, Xinyu Shen)
 
+* Coming soon...
+
 </br>
 
 ### Selected Homeworks:
@@ -22,3 +24,5 @@ output: html_document
 * [Model Building, Cross-Validation, and Bootstrapping](https://github.com/Jesse925/p8105_hw6_jc5314/blob/master/p8105_hw6_jc5314.md)
 
 * [Linear Regression Model: theory and practise](Junxian_Chen_HW4.html)
+
+* Coming soon...

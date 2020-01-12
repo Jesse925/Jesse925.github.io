@@ -10,35 +10,36 @@ output:
 
 ## Education
 
-*May 2021*, **Master of Science in Biostatistics**, theory and method track
+*May 2021*, Columbia University, Mailman School of Public Health, NY, US
 
-Columbia University, Mailman School of Public Health, NY, US
+**Master of Science in Biostatistics**, *theory and method track*
 
-Selected Courses: Data Science, Probability, Biostatistical Methods, Epidemiology, Intro to Public Health
 
-<br/>
-
-*May 2019*, **Bachelor of Science in Engineering Physics**
-
-The Hong Kong Polytechnic University, Faculty of Applied Science and Textiles, HK
-
-Selected Courses: Statistics, Simulation, Time Series Analysis, High Dimensional Data Analysis, Decision Analysis
+**Selected Courses**: Data Science, Probability, Biostatistical Methods, Epidemiology, Introduction to Public Health
 
 <br/>
 
-*Aug. - Dec. 2017*, Student Exchange Program
+*May 2019*, The Hong Kong Polytechnic University, Faculty of Applied Science and Textiles, HK
 
-North Carolina State University, College of Sciences North Carolina, NC, US 
+**Bachelor of Science in Engineering Physics**
 
-Selected Courses: Scientific Computing with Python, Statistics Programming in SAS, Statistical Inference & Regression
+**Selected Courses**: Statistics, Simulation, Time Series Analysis, High Dimensional Data Analysis, Decision Analysis
+
+<br/>
+
+*Aug. - Dec. 2017*, North Carolina State University, College of Sciences, North Carolina, NC, US 
+
+**Student Exchange Program**
+
+**Selected Courses**: Statistics Programming in SAS, Scientific Computing with Python, Statistical Inference & Regression
 
 <br/>
 
 ## Working Experience 
 
-*May - Aug. 2019*, **AI Product Manager Intern** (Medical & Healthcare Group) 
+*May - Aug. 2019*, **AI Product Manager Intern** (Medical Treatment & Healthcare Group) 
 
-Ping-An Technology (Shen Zhen) Co., Ltd. Guang Dong, CN 
+[Ping-An Technology (Shen Zhen) Co., Ltd.](https://tech.pingan.com), Guang Dong, CN 
 
 Accomplishments:
 
@@ -62,6 +63,8 @@ Johns Hopkins University, Department of Biostatistics, MD, US
 
 Project: *Inverse Odds Ratio-Weighted (IORW) Estimation for Causal Mediation Analysis*
 
+Supervisor: [Dr. Ni Zhao](http://biostat.jhsph.edu/~nzhao)
+
 Accomplishments:
 
 * Conducted theoretical analyses on the IORW estimation method in mediation analysis on continuous and binomial cases 
@@ -77,6 +80,8 @@ Accomplishments:
 The Hong Kong Polytechnic University, Department of Applied Mathematics, HK 
 
 Project: *Mathematical Modeling and Prediction for Pneumonia and Influenza (P&I) Mortality*
+
+Supervisor: [Dr. Daihai He](https://www.polyu.edu.hk/ama/people/detail/20/)
 
 Accomplishments:
 
@@ -95,6 +100,8 @@ Accomplishments:
 The Hong Kong Polytechnic University, Department of Applied Physics, HK
 
 Capstone Project: **Artificial Neural Network for Molecular Dynamic Simulation**
+
+Supervisor: [Dr. Onofrio Nicolas](http://begbi.alwaysdata.net/index.php)
 
 Accomplishments:
 
@@ -118,18 +125,21 @@ Accomplishments:
 
 ## Leadership and Volunteers
 
+*Jan. 2020 - Dec. 2020*, **President**
+
+Career China Club, Mailman School of Public Health, Columbia University
+
+<br/>
 *Sep. 2019 - May 2020*, **Wellness Ambassador**
 
 Office of University Life, Columbia University
 
 <br/>
-
 *May 2016 - May 2017*, **Vice President**
 
 The Chinese Mainland Students’ Association, Hong Kong Polytechnic University 
 
 <br/>
-
 *Jun. - Jul. 2016*, **Volunteer**
 
 Voluntary Service in Rural Farms, Sichuan Province, China

@@ -1,5 +1,5 @@
 ---
-title: "Welcome to Junxian (Jesse) 's Website"
+title: "Welcome to *Junxian* (*Jesse*) 's Website"
 output: 
   html_document:
     toc: true
@@ -28,19 +28,19 @@ Sure! You can learn more about me and see my resume [here](about_page.html)!
 
 </br>
 
-### <font color="red"> My Projects </font>
+### <font color="003366"> My Projects </font>
 
 You can view my selected projects and homeworks in data analyses [here](projects.html) or click the <font size="3" color="black">'My Projects'</font> buttom on the site navigation bar.
 
 </br>
 
-### <font color="red"> Data Science Notes </font>
+### <font color="003366"> Data Science Notes </font>
 
 You can view some data science notes in R [here](data_science_notes.html) or click the <font size="3" color="black">'Data Science Notes'</font> buttom on the site navigation bar.
 
 </br>
 
-### <font color="red"> Data Visualization Examples </font>
+### <font color="003366"> Data Visualization Examples </font>
 
 You can view some data visualization examples in R by clicking the <font size="3" color="black">'Data Visualizations'</font> buttom on the site navigation bar. You will see a drop-down menu contains 'Plotly Example Code' and 'Dashboard Example'. 
 
