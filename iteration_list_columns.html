@@ -517,8 +517,6 @@ url_base = &quot;https://www.amazon.com/product-reviews/B00005JNBQ/ref=cm_cr_arp
 vec_urls = str_c(url_base, 1:5)
 
 dynamite_reviews = map_df(vec_urls, read_page_reviews)</code></pre>
-<pre><code>## Warning: `data_frame()` is deprecated, use `tibble()`.
-## This warning is displayed once per session.</code></pre>
 </div>
 </div>
 <div id="list-columns" class="section level1">
@@ -553,52 +551,31 @@ weather_nest</code></pre>
   pull(data) %&gt;% 
   .[[1]]</code></pre>
 <pre><code>## # A tibble: 366 x 4
-##    date        prcp  tmax  tmin
-##    &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1 2016-01-01     0   5.6   1.1
-##  2 2016-01-02     0   4.4   0  
-##  3 2016-01-03     0   7.2   1.7
-##  4 2016-01-04     0   2.2  -9.9
-##  5 2016-01-05     0  -1.6 -11.6
-##  6 2016-01-06     0   5    -3.8
-##  7 2016-01-07     0   7.8  -0.5
-##  8 2016-01-08     0   7.8  -0.5
-##  9 2016-01-09     0   8.3   4.4
-## 10 2016-01-10   457  15     4.4
-## # … with 356 more rows</code></pre>
+##   date        prcp  tmax  tmin
+##   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 2016-01-01     0   5.6   1.1
+## 2 2016-01-02     0   4.4   0  
+## 3 2016-01-03     0   7.2   1.7
+## # … with 363 more rows</code></pre>
 <pre class="r"><code>weather_nest$data[[1]]</code></pre>
 <pre><code>## # A tibble: 366 x 4
-##    date        prcp  tmax  tmin
-##    &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1 2016-01-01     0   5.6   1.1
-##  2 2016-01-02     0   4.4   0  
-##  3 2016-01-03     0   7.2   1.7
-##  4 2016-01-04     0   2.2  -9.9
-##  5 2016-01-05     0  -1.6 -11.6
-##  6 2016-01-06     0   5    -3.8
-##  7 2016-01-07     0   7.8  -0.5
-##  8 2016-01-08     0   7.8  -0.5
-##  9 2016-01-09     0   8.3   4.4
-## 10 2016-01-10   457  15     4.4
-## # … with 356 more rows</code></pre>
+##   date        prcp  tmax  tmin
+##   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 2016-01-01     0   5.6   1.1
+## 2 2016-01-02     0   4.4   0  
+## 3 2016-01-03     0   7.2   1.7
+## # … with 363 more rows</code></pre>
 <pre class="r"><code>weather_nest %&gt;% 
   unnest()</code></pre>
 <pre><code>## Warning: `cols` is now required.
 ## Please use `cols = c(data)`</code></pre>
 <pre><code>## # A tibble: 1,098 x 6
-##    name           id          date        prcp  tmax  tmin
-##    &lt;chr&gt;          &lt;chr&gt;       &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1 CentralPark_NY USW00094728 2016-01-01     0   5.6   1.1
-##  2 CentralPark_NY USW00094728 2016-01-02     0   4.4   0  
-##  3 CentralPark_NY USW00094728 2016-01-03     0   7.2   1.7
-##  4 CentralPark_NY USW00094728 2016-01-04     0   2.2  -9.9
-##  5 CentralPark_NY USW00094728 2016-01-05     0  -1.6 -11.6
-##  6 CentralPark_NY USW00094728 2016-01-06     0   5    -3.8
-##  7 CentralPark_NY USW00094728 2016-01-07     0   7.8  -0.5
-##  8 CentralPark_NY USW00094728 2016-01-08     0   7.8  -0.5
-##  9 CentralPark_NY USW00094728 2016-01-09     0   8.3   4.4
-## 10 CentralPark_NY USW00094728 2016-01-10   457  15     4.4
-## # … with 1,088 more rows</code></pre>
+##   name           id          date        prcp  tmax  tmin
+##   &lt;chr&gt;          &lt;chr&gt;       &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 CentralPark_NY USW00094728 2016-01-01     0   5.6   1.1
+## 2 CentralPark_NY USW00094728 2016-01-02     0   4.4   0  
+## 3 CentralPark_NY USW00094728 2016-01-03     0   7.2   1.7
+## # … with 1,095 more rows</code></pre>
 <div id="operations-on-list-columns" class="section level2">
 <h2>Operations on list columns</h2>
 <pre class="r"><code>central_park_df = 

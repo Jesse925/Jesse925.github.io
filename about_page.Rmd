@@ -15,7 +15,7 @@ output:
 **Master of Science in Biostatistics**, *theory and method track*
 
 
-**Selected Courses**: Data Science, Probability, Biostatistical Methods, Epidemiology, Introduction to Public Health
+**Selected Courses**: Data Science, Machine Learning, Computer System, Probability, Inference, Biostatistical Methods I&II, Epidemiology
 
 <br/>
 
@@ -43,15 +43,13 @@ output:
 
 Accomplishments:
 
-* Investigated status quo of widespread diseases and problems encountered in treatments through research and market data
+* Studied and searched for latest AI techniques and machine learning models with technical teams
 
-* Proposed innovative products with AI techniques in assisting prevention, diagnosis, and treatment of diseases
+* Designed innovative products with AI techniques in assisting prevention, diagnosis, and treatment of diseases
 
-* Analyzed existing data and used SWOT and PEST methods to explore market demand and product availability
+* Collected and analyzed data from various sources and used SWOT and PEST methods to explore product availability
 
-* Created project reports and presented to company leaders to illustrate the new products
-
-* Assisted in other projects including ‘Knowledge Graph construction for precision medicine’, ‘National Health Accounts with AI techniques’, ‘Intelligent prediction for adjusted life expectancy’ through data collection and market research
+* Assisted in projects including ‘COPD e-platform for hierarchical diagnosis & treatment’, ‘National health accounts with AI techniques’, ‘Knowledge graph construction for precision medicine’ through data analyses and product design
 
 <br/>
 
@@ -67,11 +65,11 @@ Supervisor: [Dr. Ni Zhao](http://biostat.jhsph.edu/~nzhao)
 
 Accomplishments:
 
-* Conducted theoretical analyses on the IORW estimation method in mediation analysis on continuous and binomial cases 
+* Conducted theoretical study on the IORW estimation method in mediation analysis on continuous and binomial cases
 
-* Applied the approach into practical models in genomics and conducted comprehensive simulations with real data
+* Applied the approach into mediation models and conducted comprehensive simulations with real data in genomics
 
-* Sought and developed more effective and flexible modifications to this method when dealing with high dimensional data 
+* Developed more effective modifications to this method using LASSO when dealing with high-dimensional data
 
 <br/>
 
@@ -115,7 +113,7 @@ Accomplishments:
 
 ## Techniques and Skills
 
-**Programming Language**: R, Python, SAS, SQL, C++, C, MATLAB 
+**Programming Language**:  R, Python, SQL, SAS, C++, C, Git, Tableau, Spark, Microsoft Office
 
 **Software**: Tableau, Microsoft Office
 
